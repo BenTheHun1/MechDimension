@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float jumpHeight;
+    public bool left; //otherwise, right
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +20,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
+            gameObject.transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+            left = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
             gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
+            gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            left = false;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
