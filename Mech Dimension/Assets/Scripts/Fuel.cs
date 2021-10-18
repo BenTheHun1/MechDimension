@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Fuel : MonoBehaviour
 {
-    public Transform point;
-    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +13,6 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Instantiate(bullet, point.position, point.rotation);
-        }
+        
     }
 }
