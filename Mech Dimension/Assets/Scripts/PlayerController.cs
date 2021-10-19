@@ -7,10 +7,28 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpHeight;
     public bool left; //otherwise, right
+    public bool isOnGround;
+
+    public static bool hasGun;
+    public static bool hasJump;
+    public static bool hasRocketJump;
+    public static bool hasLight;
+    public static bool hasTempControl;
+
+    public GameObject Gun;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasJump = hasGun = true;
+        if (hasGun)
+        {
+            Gun.SetActive(true);
+        }
+        else
+        {
+            Gun.SetActive(false);
+        }
         
     }
 
@@ -29,9 +47,19 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             left = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && hasJump && isOnGround)
         {
+            isOnGround = false;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Untagged"))
+        {
+            isOnGround = true;
         }
     }
 }
