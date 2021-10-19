@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     }
 
 
-    IEnumerator Despawn()
+    IEnumerator Destroy()
     {
         yield return new WaitForSeconds(timeToDestroy);
         Destroy(gameObject);
@@ -37,7 +37,6 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("hit");
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //collision.gameObject.GetComponent<EnemyController>().hp -= 1;
