@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && hasJump && isOnGround)
         {
-            isOnGround = false;
+            //isOnGround = false;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
 
@@ -60,6 +60,15 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Untagged"))
         {
             isOnGround = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Untagged"))
+        {
+            isOnGround = false;
+
         }
     }
 }
