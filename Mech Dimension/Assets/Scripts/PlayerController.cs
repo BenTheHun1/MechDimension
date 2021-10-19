@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
     public static bool hasTempControl;
 
     public GameObject Gun;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
         hasJump = hasGun = true;
         if (hasGun)
         {
@@ -37,16 +39,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
+            rb.AddForce(Vector2.left * speed * Time.deltaTime);
             gameObject.transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
             left = true;
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
+            rb.AddForce(Vector2.right * speed * Time.deltaTime);
             gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             left = false;
         }
+
         if (Input.GetKeyDown(KeyCode.Space) && hasJump && isOnGround)
         {
             //isOnGround = false;
