@@ -16,33 +16,6 @@ public class HealthSystem : MonoBehaviour
 
 
 
-
-
-    public void damageMech(float damage)
-    {
-        mechHealth -= damage;
-        updateHealthBarDisplay();
-        //does mech death sequence if mech health 0
-        if (mechHealth <= 0.0f)
-        {
-            mechDies();
-        }
-    }
-
-
-    public void healMech(float healAmount)
-    {
-        if(mechHealth + healAmount > 100)
-        {
-            mechHealth = 100;
-        } else
-        {
-            mechHealth += healAmount;
-        }
-    }
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +32,36 @@ public class HealthSystem : MonoBehaviour
             StartCoroutine(healthIsLowFlash());
         }
     }
+
+
+
+
+
+    public void damageMech(float damage)
+    {
+        mechHealth -= damage;
+        updateHealthBarDisplay();
+
+        //does mech death sequence if mech health 0
+        if (mechHealth <= 0.0f)
+        {
+            mechDies();
+        }
+    }
+
+
+    public void healMech(float healAmount)
+    {
+        if (mechHealth + healAmount > 100)
+        {
+            mechHealth = 100;
+        }
+        else
+        {
+            mechHealth += healAmount;
+        }
+    }
+
 
     IEnumerator healthIsLowFlash()
     {
