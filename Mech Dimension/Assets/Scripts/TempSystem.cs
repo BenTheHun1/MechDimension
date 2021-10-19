@@ -10,9 +10,18 @@ public class TempSystem : MonoBehaviour
     public bool mechIsInColdArea;           //these you only enable in the Ice/Forest areas and disable when out of them
     public bool mechIsInHotArea;        
     public bool mechIsInRegularArea;                //this is what you change when the mech enters a safe area (heat slime or shadow) and disable when exiting
+    public bool mechHasTempControlMod;
+    public bool mechHasCoolingOn;
+    public bool mechHasWarmingOn;
+
+    private bool mechhasEnabledTempControlModDisplayFirstTime;
     private bool isCurrentlyHurtingPlayer;
+    
 
     public GameObject mechTempatureDisplay;
+    public GameObject mechTempatureControlModDisplay;
+    public GameObject EToCoolBackdropDisplay;
+    public GameObject QToWarmBackdropDisplay;
 
     private Color currentMechTempDisplayColor;
     private Color defaultMechTempDisplyColor;
@@ -35,18 +44,32 @@ public class TempSystem : MonoBehaviour
         {
             if (mechTempature > 0.5f)
             {
-                mechTempature -= Time.deltaTime / 30;        //* modifier if needed
+                if (mechTempature >= 0.85f)
+                {
+                    mechTempature -= Time.deltaTime / 5;       //go back to normal super fast here
+                }
+                else
+                {
+                    mechTempature -= Time.deltaTime / 15;
+                }
             }
             else
             {
-                mechTempature += Time.deltaTime / 30;        //* modifier if needed
+                if (mechTempature <= 0.25f)
+                {
+                    mechTempature += Time.deltaTime / 5;       //go back to normal super fast here
+                }
+                else
+                {
+                    mechTempature += Time.deltaTime / 15;
+                }
             }
         } else if (!mechIsInRegularArea && mechIsInColdArea && mechTempature > 0.05f)
         {
-            mechTempature -= Time.deltaTime / 40;            //* modifier if needed
+            mechTempature -= Time.deltaTime / 30;            //* modifier if needed
         } else if (!mechIsInRegularArea && mechIsInHotArea && mechTempature < 1f)
         {
-            mechTempature += Time.deltaTime / 40;            //* modifier if needed
+            mechTempature += Time.deltaTime / 30;            //* modifier if needed
         } 
 
         //updates the display of the mech's tempature
@@ -64,8 +87,86 @@ public class TempSystem : MonoBehaviour
         {
             mechTempatureDisplay.gameObject.GetComponent<Image>().color = defaultMechTempDisplyColor;
         }
+
+
+
+
+
+        //if the mech has the TempControlMod, the display is out and the input system is implemented
+        if (mechHasTempControlMod)
+        {
+            //enable tempcontroldisplay on first run through
+            if (!mechhasEnabledTempControlModDisplayFirstTime)
+            {
+                mechTempatureControlModDisplay.gameObject.SetActive(true);
+            }
+
+            //check for warming/cooling buttons
+            updateCoolingAndWarmingInputs();
+        }
+
+
+
+
+
+
+
+
     }
 
+
+    void updateCoolingAndWarmingInputs()
+    {
+        //if E is pressed enable/disable cooling and disable warming
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!mechHasCoolingOn)
+            {
+                mechHasCoolingOn = true;
+                mechHasWarmingOn = false;
+                EToCoolBackdropDisplay.gameObject.GetComponent<Image>().color = Color.cyan;
+                QToWarmBackdropDisplay.gameObject.GetComponent<Image>().color = Color.black;
+                if (mechIsInHotArea)
+                {
+                    mechIsInRegularArea = true;
+                } else
+                {
+                    mechIsInRegularArea = false;
+                }
+            }
+            else
+            {
+                mechHasCoolingOn = false;
+                EToCoolBackdropDisplay.gameObject.GetComponent<Image>().color = Color.black;
+                mechIsInRegularArea = false;
+            }
+
+            //if Q is pressed enable/disable warming and disable cooling
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!mechHasWarmingOn)
+            {
+                mechHasWarmingOn = true;
+                mechHasCoolingOn = false;
+                QToWarmBackdropDisplay.gameObject.GetComponent<Image>().color = Color.red;
+                EToCoolBackdropDisplay.gameObject.GetComponent<Image>().color = Color.black;
+                if (mechIsInColdArea)
+                {
+                    mechIsInRegularArea = true;
+                } else
+                {
+                    mechIsInRegularArea = false;
+                }
+            }
+            else
+            {
+                mechHasWarmingOn = false;
+                QToWarmBackdropDisplay.gameObject.GetComponent<Image>().color = Color.black;
+                mechIsInRegularArea = false;
+            }
+        }
+    }
 
 
     void tempIsTooCold()
@@ -97,7 +198,7 @@ public class TempSystem : MonoBehaviour
 
         yield return new WaitForSeconds(0.35f);
         mechTempatureDisplay.gameObject.GetComponent<Image>().color = defaultMechTempDisplyColor;
-        healthSystemScript.damageMech(1f);                                                          //adjust the damage here <<<<<<<<<<<<<
+        healthSystemScript.damageMech(2f);                                                          //adjust the damage here <<<<<<<<<<<<<
         isCurrentlyHurtingPlayer = false;
     }
 
