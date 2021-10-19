@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &239223226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -549,7 +549,9 @@ MonoBehaviour:
   mechIsInColdArea: 0
   mechIsInHotArea: 0
   mechIsInRegularArea: 0
-  mechHasTempControlMod: 1
+  mechHasTempControlMod: 0
+  mechHasCoolingOn: 0
+  mechHasWarmingOn: 0
   mechTempatureDisplay: {fileID: 8694128147706392578}
   mechTempatureControlModDisplay: {fileID: 239223225}
   EToCoolBackdropDisplay: {fileID: 1499243980}

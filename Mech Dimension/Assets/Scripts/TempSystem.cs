@@ -66,10 +66,10 @@ public class TempSystem : MonoBehaviour
             }
         } else if (!mechIsInRegularArea && mechIsInColdArea && mechTempature > 0.05f)
         {
-            mechTempature -= Time.deltaTime / 30;            //* modifier if needed
+            mechTempature -= Time.deltaTime / 25;            //* modifier if needed
         } else if (!mechIsInRegularArea && mechIsInHotArea && mechTempature < 1f)
         {
-            mechTempature += Time.deltaTime / 30;            //* modifier if needed
+            mechTempature += Time.deltaTime / 25;            //* modifier if needed
         } 
 
         //updates the display of the mech's tempature
