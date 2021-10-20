@@ -15,15 +15,20 @@ public class PlayerController : MonoBehaviour
     public static bool hasLight;
     public static bool hasTempControl;
 
+    public Material lit;
+    public Material def;
+
     public int maxJumps;
     public int jumpsLeft;
 
     public GameObject Gun;
+    public GameObject Light;
     public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<SpriteRenderer>().material = def;
         rb = gameObject.GetComponent<Rigidbody2D>();
         hasJump = true;
         if (hasGun)
@@ -42,11 +47,17 @@ public class PlayerController : MonoBehaviour
         {
             maxJumps = 1;
         }
+        if (hasLight)
+        {
+            Light.SetActive(true);
+        }
+        else
+        {
+            Light.SetActive(false);
+        }
 
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
@@ -67,7 +78,7 @@ public class PlayerController : MonoBehaviour
             jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
-
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -75,6 +86,23 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Untagged"))
         {
             jumpsLeft = maxJumps;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Dark"))
+        {
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == def)
+            {
+                Debug.Log("Change to Lit");
+                gameObject.GetComponent<SpriteRenderer>().material = lit;
+            }
+            else
+            {
+                Debug.Log("Change to Def");
+                gameObject.GetComponent<SpriteRenderer>().material = def;
+            }
         }
     }
 
