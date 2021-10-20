@@ -5,12 +5,20 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     PlayerController pl;
-    public string type;
+    
+    public enum powerType
+    {
+        Gun, Jump, Light, Rocket, TempControl
+    }
+
+    public powerType thisPowerUp;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        if ((PlayerController.hasGun && type == "gun") || (PlayerController.hasJump && type == "jump") || (PlayerController.hasLight && type == "light") || (PlayerController.hasRocketJump && type == "rocket") || (PlayerController.hasTempControl && type == "temp"))
+        if ((PlayerController.hasGun && thisPowerUp == powerType.Gun) || (PlayerController.hasJump && thisPowerUp == powerType.Jump) || (PlayerController.hasLight && thisPowerUp == powerType.Light) || (PlayerController.hasRocketJump && thisPowerUp == powerType.Rocket) || (PlayerController.hasTempControl && thisPowerUp == powerType.TempControl))
         {
             Destroy(gameObject);
         }
@@ -27,7 +35,7 @@ public class PowerUp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (type == "gun")
+            if (thisPowerUp == powerType.Gun)
             {
                 PlayerController.hasGun = true;
                 pl.Gun.SetActive(true);

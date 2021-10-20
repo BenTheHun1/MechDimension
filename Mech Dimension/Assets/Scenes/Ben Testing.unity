@@ -1126,6 +1126,8 @@ MonoBehaviour:
   jumpHeight: 8.5
   left: 0
   isOnGround: 0
+  maxJumps: 0
+  jumpsLeft: 0
   Gun: {fileID: 1632952430}
   rb: {fileID: 0}
 --- !u!50 &1470143594
@@ -1229,7 +1231,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3255}
+  m_Offset: {x: 0, y: -0.3146493}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1240,7 +1242,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.03224653}
+  m_Size: {x: 0.1, y: 0.010545075}
   m_EdgeRadius: 0
 --- !u!1 &1632952430
 GameObject:

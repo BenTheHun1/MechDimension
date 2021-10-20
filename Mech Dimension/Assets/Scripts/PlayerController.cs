@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public static bool hasLight;
     public static bool hasTempControl;
 
+    public int maxJumps;
+    public int jumpsLeft;
+
     public GameObject Gun;
     public Rigidbody2D rb;
 
@@ -31,6 +34,15 @@ public class PlayerController : MonoBehaviour
         {
             Gun.SetActive(false);
         }
+        if (hasRocketJump)
+        {
+            maxJumps = 2;
+        }
+        else
+        {
+            maxJumps = 1;
+        }
+
         
     }
 
@@ -50,28 +62,28 @@ public class PlayerController : MonoBehaviour
             left = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && hasJump && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && hasJump && jumpsLeft > 0)
         {
-            //isOnGround = false;
+            jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Untagged"))
         {
-            isOnGround = true;
+            jumpsLeft = maxJumps;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Untagged"))
         {
             isOnGround = false;
 
         }
-    }
+    }*/
 }
