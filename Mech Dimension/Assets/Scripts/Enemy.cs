@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();      //not until it is in the scene
+        //playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();      //not until it is in the scene
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
@@ -85,8 +85,11 @@ public class Enemy : MonoBehaviour
             range = 1;
             sight = 6;
             movementSpeed = 2;
-
+            Debug.Log("This happened");
+            Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
+            
             enemyDisplayIdle = iceGoopDisplayIdle;              //make sure to set it to active if its off
+            enemyDisplayMovement = iceGoopDisplayMovement;
             enemyDisplayAttack = iceGoopDisplayAttack;
         } else if (thisEnemyType.Equals(enemyType.forBeetle))
         {
@@ -98,6 +101,7 @@ public class Enemy : MonoBehaviour
             movementSpeed = 1.5f;
 
             enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
+            enemyDisplayMovement = forBeetleDisplayMovment;
             enemyDisplayAttack = forBeetleDisplayAttack;
         }
     }
@@ -169,35 +173,58 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(doMeleeAttack());
             } else
             {
-                /*
-                if(playerControllerScript.transform.position.x > transform.position.x)
+                if(transform.position.x < rightBounds.transform.position.x || transform.position.x > leftBounds.transform.position.x && !isMoving && !isAttacking)
                 {
-                    if (!isMoving)
+                    if (playerControllerScript.transform.position.x > transform.position.x)
                     {
-                        doMove(true);   //move right            //this also needs to be able to NOT move if it would go beyond its bounds
+                            StartCoroutine(doMove(true));   //move right        START COROUTINE!!!
                     }
-                } else
-                {
-                    if (!isMoving)
+                    else
                     {
-                        doMove(false);  //move left
+                        StartCoroutine(doMove(false));  //move left
                     }
                 }
-                */
             }
 
         }
         else
         {
-            
-            //just move back and forth between your bounds
+            //if you are too far left or right switch and go other direction
+            if(transform.position.x >= rightBounds.transform.position.x && !isMoving && !isAttacking)
+            {
+                //switch and start moving left
+                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                StartCoroutine(doMove(false));
+                
+            } else if(transform.position.x <= leftBounds.transform.position.x && !isMoving && !isAttacking)
+            {
+                //switch and start moving right
+                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                StartCoroutine(doMove(true));
+
+                //otherwise go the direction you are facing
+            } else if(!isMoving && !isAttacking)
+            {
+                if(enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX == false)
+                {
+                    //move left
+                    StartCoroutine(doMove(false));
+                } else
+                {
+                    //move right
+                    StartCoroutine(doMove(true));
+                }
+            }
         }
     }
 
     IEnumerator doMove(bool moveToTheRight)
     {
+        isMoving = true;
         //make sure to enable ismoving now and set to false when not
+        //do move animation
         yield return new WaitForSeconds(1.0f);  //idk
+        isMoving = false;
     }
 
 
