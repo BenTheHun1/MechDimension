@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Vector2.left * speed * Time.deltaTime);
-            gameObject.transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+            gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = true;
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(Vector2.right * speed * Time.deltaTime);
-            gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = false;
         }
 
