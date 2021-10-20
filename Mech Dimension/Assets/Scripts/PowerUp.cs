@@ -39,6 +39,12 @@ public class PowerUp : MonoBehaviour
                 PlayerController.hasLight = true;
                 pl.Light.SetActive(true);
             }
+            if (thisPowerUp == powerType.Jump)
+            {
+                PlayerController.hasJump = true;
+                pl.ReloadStats();
+            }
+
 
             Destroy(gameObject);
         }

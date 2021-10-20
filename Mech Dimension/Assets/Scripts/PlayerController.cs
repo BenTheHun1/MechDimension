@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().material = def;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        hasJump = true;
         if (hasGun)
         {
             Gun.SetActive(true);
@@ -43,9 +42,13 @@ public class PlayerController : MonoBehaviour
         {
             maxJumps = 2;
         }
-        else
+        else if (hasJump)
         {
             maxJumps = 1;
+        }
+        else
+        {
+            maxJumps = 0;
         }
         if (hasLight)
         {
@@ -57,6 +60,23 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void ReloadStats()
+    {
+        if (hasRocketJump)
+        {
+            maxJumps = 2;
+        }
+        else if (hasJump)
+        {
+            maxJumps = 1;
+        }
+        else
+        {
+            maxJumps = 0;
+        }
+    }
+
 
     void Update()
     {
