@@ -7,6 +7,8 @@ public class HealthSystem : MonoBehaviour
 {
     public float mechHealth = 50;
 
+    public float mechMAXHealth = 50;
+
     public GameObject HealthBarDisplay;
 
     private bool isFlashing;
@@ -52,9 +54,9 @@ public class HealthSystem : MonoBehaviour
 
     public void healMech(float healAmount)
     {
-        if (mechHealth + healAmount > 100)
+        if (mechHealth + healAmount > mechMAXHealth)
         {
-            mechHealth = 100;
+            mechHealth = mechMAXHealth;
         }
         else
         {
