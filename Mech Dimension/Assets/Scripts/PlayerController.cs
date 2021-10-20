@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        hasJump = hasGun = true;
+        hasJump = true;
         if (hasGun)
         {
             Gun.SetActive(true);
