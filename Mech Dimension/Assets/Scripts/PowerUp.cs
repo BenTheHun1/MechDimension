@@ -43,6 +43,7 @@ public class PowerUp : MonoBehaviour
             {
                 PlayerController.hasJump = true;
                 pl.ReloadStats();
+                pl.Legs.GetComponent<SpriteRenderer>().color = Color.white;
             }
             if (thisPowerUp == powerType.Rocket)
             {

@@ -24,8 +24,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Gun;
     public GameObject Light;
     public GameObject TempControl;
+    public GameObject Legs;
     public Rigidbody2D rb;
 
+    bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             maxJumps = 0;
+            Legs.GetComponent<SpriteRenderer>().color = new Color(0.85f, 0.45f, 0.115f, 1);
         }
         if (hasLight)
         {
@@ -108,6 +111,28 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
         
+        if (rb.velocity.x != 0)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+
+        if (isMoving && isOnGround)
+        {
+            if (!gameObject.GetComponent<AudioSource>().isPlaying)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -115,6 +140,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Untagged"))
         {
             jumpsLeft = maxJumps;
+            isOnGround = true;
         }
     }
 
@@ -135,12 +161,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Untagged"))
         {
             isOnGround = false;
 
         }
-    }*/
+    }
 }
