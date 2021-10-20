@@ -7,7 +7,7 @@ public class TempSystem : MonoBehaviour
 {
     public float mechTempature = 0.50f;
 
-    public bool mechIsInColdArea;           //these you only enable in the Ice/Forest areas and disable when out of them
+    public bool mechIsInColdArea;            //these you only enable in the Ice/Forest areas and disable when out of them
     public bool mechIsInHotArea;        
     public bool mechIsInRegularArea;                //this is what you change when the mech enters a safe area (heat slime or shadow) and disable when exiting
     public bool mechHasTempControlMod;
@@ -195,6 +195,7 @@ public class TempSystem : MonoBehaviour
 
         yield return new WaitForSeconds(0.35f);
         mechTempatureDisplay.gameObject.GetComponent<Image>().color = currentMechTempDisplayColor;
+        healthSystemScript.damageMech(2f);
 
         yield return new WaitForSeconds(0.35f);
         mechTempatureDisplay.gameObject.GetComponent<Image>().color = defaultMechTempDisplyColor;
