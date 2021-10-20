@@ -9,10 +9,10 @@ public class Enemy : MonoBehaviour
     {
         iceScream,
         iceGoop,
+        forBeetle,
+        forEnemy2,
         SiFiEnemy1,
         SiFiEnemy2,
-        ForestEnemy1,
-        ForestEnemy2
     }
 
     //player accesss
@@ -33,14 +33,32 @@ public class Enemy : MonoBehaviour
     private bool isMoving;
 
     public GameObject enemyHead;
-    public GameObject enemyDisplay;
+    public GameObject enemyDisplayParent;
+    public GameObject enemyDisplayIdle;
+    public GameObject enemyDisplayMovement;
+    public GameObject enemyDisplayAttack;
+
+    private GameObject projectileToFire;
+
+    public GameObject rightBounds;
+    public GameObject leftBounds;
 
     //iceScream
-    private float slowDowntime;
-
     public GameObject iceScreamProjectilePrefab;
+    public GameObject iceScreamDisplayIdle;
+    public GameObject iceScreamDisplayAttack;
 
 
+    //iceGoop
+    public GameObject iceGoopDisplayIdle;
+    public GameObject iceGoopDisplayMovement;
+    public GameObject iceGoopDisplayAttack;
+
+
+    //forBeetle
+    public GameObject forBeetleDisplayIdle;
+    public GameObject forBeetleDisplayMovment;
+    public GameObject forBeetleDisplayAttack;
 
 
     // Start is called before the first frame update
@@ -55,15 +73,32 @@ public class Enemy : MonoBehaviour
             rateOfFire = 6;     //once every ___ seconds
             range = 4;
             sight = 8;
-            slowDowntime = 2;
+
+            enemyDisplayIdle = iceScreamDisplayIdle;              //make sure to set it to active if its off
+            enemyDisplayAttack = iceScreamDisplayAttack;            //same
+            projectileToFire = iceScreamProjectilePrefab;
         } else if (thisEnemyType.Equals(enemyType.iceGoop))
         {
             health = 15;
-            damage = 2;
+            damage = 8;
             rateOfFire = 2;
             range = 1;
             sight = 6;
             movementSpeed = 2;
+
+            enemyDisplayIdle = iceGoopDisplayIdle;              //make sure to set it to active if its off
+            enemyDisplayAttack = iceGoopDisplayAttack;
+        } else if (thisEnemyType.Equals(enemyType.forBeetle))
+        {
+            health = 20;
+            damage = 10;
+            rateOfFire = 2.5f;
+            range = 1;
+            sight = 5;
+            movementSpeed = 1.5f;
+
+            enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
+            enemyDisplayAttack = forBeetleDisplayAttack;
         }
     }
 
@@ -74,80 +109,99 @@ public class Enemy : MonoBehaviour
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
-            iceScreamScan();
-        } else if (thisEnemyType.Equals(enemyType.iceGoop))
+            doRangedScan();
+        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forBeetle))    //right? or?
         {
-            
+            doMeleeScan();
         }
     }
 
 
-    //ICESCREAM STUFF START
-    void iceScreamScan()
+
+
+    //RANGED STUFF BEGIN --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+    void doRangedScan()
     {
-        if(distanceToPlayer <= sight)
+        if (distanceToPlayer <= sight)
         {
             //makes the head look at the player
-            enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);   
-            
+            enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);
+
             //makes the body look in the general direction of the player
-            if(playerControllerScript.transform.position.x > transform.position.x)
+            if (playerControllerScript.transform.position.x > transform.position.x)
             {
-                enemyDisplay.gameObject.GetComponent<SpriteRenderer>().flipX = true;    //it might be the oposite of this.
-            } else
+                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;    //it might be the oposite of this.
+            }
+            else
             {
-                enemyDisplay.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
 
             //attacks if in range
-            if(distanceToPlayer <= range && !isAttacking)
+            if (distanceToPlayer <= range && !isAttacking)
             {
-                StartCoroutine(iceScreamAttack());
+                StartCoroutine(doRangedAttack());
             }
         }
     }
 
-
-    IEnumerator iceScreamAttack()
+    IEnumerator doRangedAttack()
     {
         isAttacking = true;
         //do attack anim once (then stop it either here or after the waitforseconds)
-        Instantiate(iceScreamProjectilePrefab, enemyHead.transform.position, enemyHead.transform.rotation);
+        Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);
         yield return new WaitForSeconds(rateOfFire);                                                        //different?
         isAttacking = false;
     }
-    //ICESCREAM STUFF END
+    //RANGED STUFF END  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
 
 
 
 
 
-
-    //ICEGOOP STUFF START
-    void iceGoopScan()
+    //MELEE STUFF BEGIN --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+    void doMeleeScan()
     {
-        if((Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < sight / 2) && (distanceToPlayer <= sight))
+        if ((Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < sight / 2) && (distanceToPlayer <= sight))
         {
-            if(distanceToPlayer <= range && !isAttacking && !isMoving)
+            if (distanceToPlayer <= range && !isAttacking && !isMoving)
             {
-                StartCoroutine(iceGoopAttack());
+                StartCoroutine(doMeleeAttack());
+            } else
+            {
+                /*
+                if(playerControllerScript.transform.position.x > transform.position.x)
+                {
+                    if (!isMoving)
+                    {
+                        doMove(true);   //move right            //this also needs to be able to NOT move if it would go beyond its bounds
+                    }
+                } else
+                {
+                    if (!isMoving)
+                    {
+                        doMove(false);  //move left
+                    }
+                }
+                */
             }
-            //else, if moving doesn't make you fall, move towards player
 
-
-
-        } else
+        }
+        else
         {
-            //just  move back and forth between your bounds
+            
+            //just move back and forth between your bounds
         }
     }
 
-    void iceGoopMove()
+    IEnumerator doMove(bool moveToTheRight)
     {
-
+        //make sure to enable ismoving now and set to false when not
+        yield return new WaitForSeconds(1.0f);  //idk
     }
 
-    IEnumerator iceGoopAttack()
+
+    IEnumerator doMeleeAttack()
     {
         isAttacking = true;
         //attack anim once
@@ -158,16 +212,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(rateOfFire);
         isAttacking = false;
     }
-    //ICEGOOP STUFF START
-
-
-
-
-
-
-
-
-
+    //MELEE STUFF END   --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
 
 
 
