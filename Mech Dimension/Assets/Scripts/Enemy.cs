@@ -43,56 +43,75 @@ public class Enemy : MonoBehaviour
     public GameObject rightBounds;
     public GameObject leftBounds;
 
+    private float attackAnimLength;
+    private float moveAnimLength;
+
+
     //iceScream
     public GameObject iceScreamProjectilePrefab;
     public GameObject iceScreamDisplayIdle;
     public GameObject iceScreamDisplayAttack;
+    private float iceScreamAttackAnimLength = 1.5f;
 
 
     //iceGoop
     public GameObject iceGoopDisplayIdle;
     public GameObject iceGoopDisplayMovement;
     public GameObject iceGoopDisplayAttack;
-
+    //private float iceGoopMoveLength = 10000;
+    //attack and move
 
     //forBeetle
     public GameObject forBeetleDisplayIdle;
     public GameObject forBeetleDisplayMovment;
     public GameObject forBeetleDisplayAttack;
+    //same for this attack and move
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();      //not until it is in the scene
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();      //not until it is in the scene
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
+            //variables
             health = 20;
             damage = 2;
             rateOfFire = 6;     //once every ___ seconds
             range = 4;
             sight = 8;
+            attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            enemyDisplayIdle = iceScreamDisplayIdle;              //make sure to set it to active if its off
-            enemyDisplayAttack = iceScreamDisplayAttack;            //same
+            //animation states
+            var Idle = Instantiate(iceScreamDisplayIdle, enemyDisplayParent.transform);
+            enemyDisplayIdle = Idle;
+            var Attack = Instantiate(iceScreamDisplayAttack, enemyDisplayParent.transform);
+            enemyDisplayAttack = Attack;
+            enemyDisplayAttack.gameObject.SetActive(false);
+
+            //projectiles
             projectileToFire = iceScreamProjectilePrefab;
         } else if (thisEnemyType.Equals(enemyType.iceGoop))
         {
+            //variables
             health = 15;
             damage = 8;
             rateOfFire = 2;
             range = 1;
             sight = 6;
             movementSpeed = 2;
-            Debug.Log("This happened");
-            Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
-            
-            enemyDisplayIdle = iceGoopDisplayIdle;              //make sure to set it to active if its off
-            enemyDisplayMovement = iceGoopDisplayMovement;
-            enemyDisplayAttack = iceGoopDisplayAttack;
+
+            //animation states
+            var Idle = Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
+            enemyDisplayIdle = Idle;
+            var Move = Instantiate(iceGoopDisplayMovement, enemyDisplayParent.transform);
+            enemyDisplayMovement = Move;
+            enemyDisplayMovement.gameObject.SetActive(false);
+            //same for the attack (MAKE SURE TO SET TO FALSE)
         } else if (thisEnemyType.Equals(enemyType.forBeetle))
         {
+            //variables
             health = 20;
             damage = 10;
             rateOfFire = 2.5f;
@@ -100,15 +119,22 @@ public class Enemy : MonoBehaviour
             sight = 5;
             movementSpeed = 1.5f;
 
-            enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
-            enemyDisplayMovement = forBeetleDisplayMovment;
-            enemyDisplayAttack = forBeetleDisplayAttack;
+            //enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
+            //enemyDisplayMovement = forBeetleDisplayMovment;
+            //enemyDisplayAttack = forBeetleDisplayAttack;
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(doRangedAttack());
+        }
+
+
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
 
         if (thisEnemyType.Equals(enemyType.iceScream))
@@ -152,9 +178,21 @@ public class Enemy : MonoBehaviour
     IEnumerator doRangedAttack()
     {
         isAttacking = true;
-        //do attack anim once (then stop it either here or after the waitforseconds)
+        enemyDisplayIdle.gameObject.SetActive(false);
+        enemyDisplayAttack.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(attackAnimLength / 2);
+
+
         Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);
-        yield return new WaitForSeconds(rateOfFire);                                                        //different?
+
+        yield return new WaitForSeconds(attackAnimLength / 2);
+
+
+        enemyDisplayIdle.gameObject.SetActive(true);
+        enemyDisplayAttack.gameObject.SetActive(false);
+        yield return new WaitForSeconds(rateOfFire - attackAnimLength);
+
         isAttacking = false;
     }
     //RANGED STUFF END  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
@@ -221,9 +259,15 @@ public class Enemy : MonoBehaviour
     IEnumerator doMove(bool moveToTheRight)
     {
         isMoving = true;
-        //make sure to enable ismoving now and set to false when not
+        
+
+
+
+
+        //make sure to enable ismoving now and set to false when not    //which way to move is crucial, and lerp to that area
         //do move animation
-        yield return new WaitForSeconds(1.0f);  //idk
+
+        yield return new WaitForSeconds(moveAnimLength);  //idk
         isMoving = false;
     }
 
@@ -231,6 +275,7 @@ public class Enemy : MonoBehaviour
     IEnumerator doMeleeAttack()
     {
         isAttacking = true;
+
         //attack anim once
         //if player is in range damage them
         //wait till the attack ends

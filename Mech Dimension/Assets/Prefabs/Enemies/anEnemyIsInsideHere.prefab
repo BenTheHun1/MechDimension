@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7160e59d0332f5a448cc460360ba9391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisEnemyType: 1
+  thisEnemyType: 0
   enemyHead: {fileID: 2005257771113018489}
   enemyDisplayParent: {fileID: 2005257770956229866}
   enemyDisplayIdle: {fileID: 2005257770956229867}
@@ -466,8 +466,8 @@ MonoBehaviour:
   rightBounds: {fileID: 2005257772119441444}
   leftBounds: {fileID: 2005257772067473318}
   iceScreamProjectilePrefab: {fileID: 8006587109056870891, guid: 6b90679f4801da64b902f18a84a9b3f6, type: 3}
-  iceScreamDisplayIdle: {fileID: 0}
-  iceScreamDisplayAttack: {fileID: 0}
+  iceScreamDisplayIdle: {fileID: 52604681672862588, guid: 78a267802bf9f024180a4ca0cce2cc96, type: 3}
+  iceScreamDisplayAttack: {fileID: 4024551126126849130, guid: c30a80f0d24c997438a59be306bd68f7, type: 3}
   iceGoopDisplayIdle: {fileID: 1235891117321461884, guid: 9941296596af2164a928dd91b3a09725, type: 3}
   iceGoopDisplayMovement: {fileID: 4694143122317303527, guid: 470872521ee79af43afafddff2b62fb7, type: 3}
   iceGoopDisplayAttack: {fileID: 0}
