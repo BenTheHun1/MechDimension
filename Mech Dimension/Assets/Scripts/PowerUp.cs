@@ -44,6 +44,16 @@ public class PowerUp : MonoBehaviour
                 PlayerController.hasJump = true;
                 pl.ReloadStats();
             }
+            if (thisPowerUp == powerType.Rocket)
+            {
+                PlayerController.hasRocketJump = true;
+                pl.ReloadStats();
+            }
+            if (thisPowerUp == powerType.TempControl)
+            {
+                PlayerController.hasTempControl = true;
+                pl.TempControl.SetActive(true);
+            }
 
 
             Destroy(gameObject);

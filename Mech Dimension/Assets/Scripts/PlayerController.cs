@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Gun;
     public GameObject Light;
+    public GameObject TempControl;
     public Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -37,6 +38,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             Gun.SetActive(false);
+        }
+        if (hasTempControl)
+        {
+            TempControl.SetActive(true);
+        }
+        else
+        {
+            TempControl.SetActive(false);
         }
         if (hasRocketJump)
         {
@@ -111,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Dark"))
+        if (collision.gameObject.CompareTag("Dark")) //Should probably be a drop, as going back and forth/jumping messes it up
         {
             if (gameObject.GetComponent<Renderer>().sharedMaterial == def)
             {
