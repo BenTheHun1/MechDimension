@@ -169,6 +169,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //deal dmg to enemy here
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            Legs.GetComponent<AudioSource>().Play();
+        }
+
         if (collision.gameObject.CompareTag("ToggleDarkness")) //Should probably be a drop, as going back and forth/jumping messes it up OR, have 2 triggers, that ontriggerexit changes things, instead of toggling back and forht with one trigger.
         {
             Debug.Log("Change to Lit");
