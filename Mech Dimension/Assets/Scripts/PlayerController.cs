@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight;
     public bool left; //otherwise, right
     public bool isOnGround;
+    public bool isFrozen;
 
     public static bool hasGun;
     public static bool hasJump;
@@ -102,20 +103,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !isFrozen)
         {
             rb.AddForce(Vector2.left * speed * Time.deltaTime);
             gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = true;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && !isFrozen)
         {
             rb.AddForce(Vector2.right * speed * Time.deltaTime);
             gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && hasJump && jumpsLeft > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && hasJump && jumpsLeft > 0 && !isFrozen)
         {
             jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);

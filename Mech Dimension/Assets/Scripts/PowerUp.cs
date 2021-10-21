@@ -33,6 +33,7 @@ public class PowerUp : MonoBehaviour
             {
                 PlayerController.hasGun = true;
                 pl.Gun.SetActive(true);
+                Debug.Log("got gun");
             }
             if (thisPowerUp == powerType.Light)
             {
