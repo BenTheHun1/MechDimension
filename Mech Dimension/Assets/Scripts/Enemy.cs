@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour
     {
         iceScream,
         iceGoop,
-        forBeetle,
-        forEnemy2,
+        forestBeetle,
+        forestEnemy2,
         SiFiEnemy1,
         SiFiEnemy2,
     }
@@ -58,13 +58,13 @@ public class Enemy : MonoBehaviour
     public GameObject iceGoopDisplayIdle;
     public GameObject iceGoopDisplayMovement;
     public GameObject iceGoopDisplayAttack;
-    //private float iceGoopMoveLength = 10000;
+    //private float iceGoopMoveLength = 10000;          //work on these
     //attack and move
 
     //forBeetle
-    public GameObject forBeetleDisplayIdle;
-    public GameObject forBeetleDisplayMovment;
-    public GameObject forBeetleDisplayAttack;
+    public GameObject forestBeetleDisplayIdle;
+    public GameObject forestBeetleDisplayMovment;
+    public GameObject forestBeetleDisplayAttack;
     //same for this attack and move
 
 
@@ -108,8 +108,10 @@ public class Enemy : MonoBehaviour
             var Move = Instantiate(iceGoopDisplayMovement, enemyDisplayParent.transform);
             enemyDisplayMovement = Move;
             enemyDisplayMovement.gameObject.SetActive(false);
-            //same for the attack (MAKE SURE TO SET TO FALSE)
-        } else if (thisEnemyType.Equals(enemyType.forBeetle))
+            var Attack = Instantiate(iceGoopDisplayAttack, enemyDisplayParent.transform);
+            enemyDisplayAttack = Attack;
+            enemyDisplayAttack.gameObject.SetActive(false);
+        } else if (thisEnemyType.Equals(enemyType.forestBeetle))
         {
             //variables
             health = 20;
@@ -119,6 +121,7 @@ public class Enemy : MonoBehaviour
             sight = 5;
             movementSpeed = 1.5f;
 
+            
             //enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
             //enemyDisplayMovement = forBeetleDisplayMovment;
             //enemyDisplayAttack = forBeetleDisplayAttack;
@@ -140,7 +143,7 @@ public class Enemy : MonoBehaviour
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
             doRangedScan();
-        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forBeetle))    //right? or?
+        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))    //right? or?
         {
             doMeleeScan();
         }
@@ -261,7 +264,7 @@ public class Enemy : MonoBehaviour
         isMoving = true;
         
 
-
+        //use a while loop here
 
 
         //make sure to enable ismoving now and set to false when not    //which way to move is crucial, and lerp to that area
