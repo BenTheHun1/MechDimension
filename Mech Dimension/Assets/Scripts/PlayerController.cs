@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //deal dmg to enemy here
+            collision.gameObject.GetComponent<Enemy>().damageEnemy(20);
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             Legs.GetComponent<AudioSource>().Play();
         }
