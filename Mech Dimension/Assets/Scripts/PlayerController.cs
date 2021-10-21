@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private TempSystem tempSystemScript;
+
+
     public float speed;
     public float jumpHeight;
     public bool left; //otherwise, right
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
+
         gameObject.GetComponent<SpriteRenderer>().material = def;
         rb = gameObject.GetComponent<Rigidbody2D>();
         if (hasGun)
@@ -193,6 +198,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Lamp"))
         {
             collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", true);
+            tempSystemScript.mechIsInRegularArea = true;
         }
     }
 
@@ -206,6 +212,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Lamp"))
         {
             collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", false);
+            if (!hasTempControl)
+            {
+                tempSystemScript.mechIsInRegularArea = false;
+            }
         }
     }
 }
