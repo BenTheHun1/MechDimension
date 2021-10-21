@@ -101,9 +101,11 @@ public class Enemy : MonoBehaviour
             health = 15;
             damage = 8;
             rateOfFire = 2;
-            range = 0.5f;
+            range = 0.3f;
             sight = 2;
             movementSpeed = 5f;
+            attackAnimLength = iceGoopAttackLength;
+            moveAnimLength = iceGoopMoveLength;
 
             //animation states
             var Idle = Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
@@ -145,7 +147,7 @@ public class Enemy : MonoBehaviour
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
-            //doRangedScan();
+            doRangedScan();
         } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))    //right? or?
         {
             doMeleeScan();
@@ -158,28 +160,70 @@ public class Enemy : MonoBehaviour
     //RANGED STUFF BEGIN --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
     void doRangedScan()
     {
-        if (distanceToPlayer <= sight)
+        if (!isAttacking)
         {
-            //makes the head look at the player
-            enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);
-
-            //makes the body look in the general direction of the player
-            if (playerControllerScript.transform.position.x > transform.position.x)
+            if (distanceToPlayer >= sight && Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < 1)
             {
-                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;    //it might be the oposite of this.
-            }
-            else
+                //just idle and look
+                if (Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < 1)
+                {
+                    if (playerControllerScript.transform.position.x > transform.position.x)
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                    } else
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    }
+                }
+            } else
             {
-                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            }
-
-            //attacks if in range
-            if (distanceToPlayer <= range && !isAttacking)
-            {
-                StartCoroutine(doRangedAttack());
+                if (Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < 1)
+                {
+                    if (playerControllerScript.transform.position.x > transform.position.x)
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                    }
+                    else
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    }
+                    if (distanceToPlayer < range)
+                    {
+                        //makes the head look at the player
+                        enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);
+                        //attack
+                        StartCoroutine(doRangedAttack());
+                    }
+                }
             }
         }
-    }
+
+
+
+                /*
+                if (distanceToPlayer <= sight)
+                {
+                    //makes the head look at the player
+                    enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);
+
+                    //makes the body look in the general direction of the player
+                    if (playerControllerScript.transform.position.x > transform.position.x)
+                    {
+                        enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;    //it might be the oposite of this.
+                    }
+                    else
+                    {
+                        enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+
+                    //attacks if in range
+                    if (distanceToPlayer <= range && !isAttacking)
+                    {
+                        StartCoroutine(doRangedAttack());
+                    }
+                }
+                */
+            }
 
     IEnumerator doRangedAttack()
     {
@@ -190,13 +234,24 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(attackAnimLength / 2);
 
 
-        Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);  //different 
+        //Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);  //different 
         //enemyHead.transform.rotation.Set(enemyHead.transform.rotation.x, 0, 0, 0);
         //Debug.Log("Z = " + enemyHead.transform.rotation.z + " ...and... Y = " + enemyHead.transform.rotation.y);
 
-        //Quaternion angle = new Quaternion(enemyHead.transform.rotation.x, 0, 0, 0);
-        //Instantiate(projectileToFire, enemyHead.transform.position, angle);
-
+        Quaternion angle = new Quaternion(0, 0, 0, 0);
+        
+        var r = Instantiate(projectileToFire, enemyHead.transform.position, angle);
+        r.transform.Rotate(enemyHead.transform.rotation.x, 0, 0);
+        if(playerControllerScript.gameObject.transform.position.x > transform.position.x)
+        {
+            r.gameObject.GetComponent<iceScreamProjScr>().moveRight = true;
+            r.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+        }
+        else
+        {
+            r.gameObject.GetComponent<iceScreamProjScr>().moveRight = false;
+            r.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
         yield return new WaitForSeconds(attackAnimLength / 2);
 
 
@@ -205,6 +260,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(rateOfFire - attackAnimLength);
 
         isAttacking = false;
+        
     }
     //RANGED STUFF END  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
 
@@ -266,12 +322,10 @@ public class Enemy : MonoBehaviour
                             enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
                             isFacingRight = false;
                         }
-                        Debug.Log("Do Attack!");
                         StartCoroutine(doMeleeAttack());
                     }
                 }
             }
-            
         }
 
 
@@ -364,13 +418,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
-
     IEnumerator doMove(bool moveToTheRight)
     {
         isMoving = true;
@@ -378,7 +425,6 @@ public class Enemy : MonoBehaviour
         enemyDisplayIdle.gameObject.SetActive(false);
 
         //do actual moving here
-        //transform.Translate(1, 0, 0);
         for(int i = 0; i < movementSpeed; i++)
         {
             if (moveToTheRight)

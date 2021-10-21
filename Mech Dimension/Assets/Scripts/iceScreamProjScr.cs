@@ -12,6 +12,8 @@ public class iceScreamProjScr : MonoBehaviour
 
     private HealthSystem healthSystemScript;
 
+    public bool moveRight;
+
 
 
 
@@ -31,7 +33,16 @@ public class iceScreamProjScr : MonoBehaviour
 
     void moveScream()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (moveRight)
+        {
+
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+        } else
+        {
+
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
     }
 
 

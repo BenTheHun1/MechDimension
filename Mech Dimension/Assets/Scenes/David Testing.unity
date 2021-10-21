@@ -682,37 +682,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: TEMPLATE_Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2005257771550550286, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005257771550550286, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005257771725437303, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005257771725437303, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005257772067473317, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.728
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005257772196767185, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
-      propertyPath: thisEnemyType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7167108618372116870, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7167108618372116870, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.327
       objectReference: {fileID: 0}
     - target: {fileID: 7167108618372116870, guid: efe4a0a7efc20384586736959ffdb861, type: 3}
       propertyPath: m_LocalPosition.y
