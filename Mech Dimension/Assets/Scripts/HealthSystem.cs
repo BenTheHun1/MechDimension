@@ -87,8 +87,7 @@ public class HealthSystem : MonoBehaviour
     void mechDies()
     {
         //disable being able to move the character.
-        //possibly death anim?
-        //enable dead menu OR just reload scene right away
+        //enable dead menu
     }
 
 

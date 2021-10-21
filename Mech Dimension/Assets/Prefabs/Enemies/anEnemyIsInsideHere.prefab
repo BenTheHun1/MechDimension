@@ -463,14 +463,17 @@ MonoBehaviour:
   enemyDisplayIdle: {fileID: 2005257770956229867}
   enemyDisplayMovement: {fileID: 2005257770956229860}
   enemyDisplayAttack: {fileID: 2005257770956229861}
+  enemyDisplayDeath: {fileID: 0}
   rightBounds: {fileID: 2005257772119441444}
   leftBounds: {fileID: 2005257772067473318}
   iceScreamProjectilePrefab: {fileID: 8006587109056870891, guid: 6b90679f4801da64b902f18a84a9b3f6, type: 3}
   iceScreamDisplayIdle: {fileID: 52604681672862588, guid: 78a267802bf9f024180a4ca0cce2cc96, type: 3}
   iceScreamDisplayAttack: {fileID: 4024551126126849130, guid: c30a80f0d24c997438a59be306bd68f7, type: 3}
+  iceScreamDisplayDeath: {fileID: 3064219140671806054, guid: 13bdb1d3d08abc145ab7289d9f1b13a6, type: 3}
   iceGoopDisplayIdle: {fileID: 1235891117321461884, guid: 9941296596af2164a928dd91b3a09725, type: 3}
   iceGoopDisplayMovement: {fileID: 4694143122317303527, guid: 470872521ee79af43afafddff2b62fb7, type: 3}
   iceGoopDisplayAttack: {fileID: 5952313736018873383, guid: 65a843726b7070a46a2268814d14cfc1, type: 3}
+  iceGoopDisplayDeath: {fileID: 7014924617247214708, guid: 855fa924e9d15f346bce4ad64f111867, type: 3}
   forestBeetleDisplayIdle: {fileID: 6503990681684078504, guid: c670a3f5057b89348be4ebb7c6e10f59, type: 3}
   forestBeetleDisplayMovment: {fileID: 8116909162065171140, guid: ffd0c34e89c413b41bfc51e8c45ff862, type: 3}
   forestBeetleDisplayAttack: {fileID: 4694114984360054570, guid: 685bdee0b1bfebf41a30d436bc5f0a1b, type: 3}
