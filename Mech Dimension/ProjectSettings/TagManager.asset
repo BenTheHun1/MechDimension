@@ -6,8 +6,12 @@ TagManager:
   tags:
   - Bullet
   - Enemy
-  - Dark
   - Lamp
+  - ToggleDarkness
+  - ToggleLight
+  - ToggleCold
+  - ToggleHeat
+  - ToggleNormal
   layers:
   - Default
   - TransparentFX

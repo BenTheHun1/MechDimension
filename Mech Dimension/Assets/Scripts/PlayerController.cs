@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     public GameObject TempControl;
     public GameObject Legs;
     public GameObject Rocket;
-    public AudioSource Landing;
     public Rigidbody2D rb;
 
     bool isMoving;
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
         tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
-        rb = gameObject.GetComponent<Rigidbody2D>();
         if (hasGun)
         {
             Gun.SetActive(true);
@@ -171,28 +169,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Dark")) //Should probably be a drop, as going back and forth/jumping messes it up OR, have 2 triggers, that ontriggerexit changes things, instead of toggling back and forht with one trigger.
+        if (collision.gameObject.CompareTag("ToggleDarkness")) //Should probably be a drop, as going back and forth/jumping messes it up OR, have 2 triggers, that ontriggerexit changes things, instead of toggling back and forht with one trigger.
         {
-            if (gameObject.GetComponent<Renderer>().sharedMaterial == def)
-            {
-                Debug.Log("Change to Lit");
-                gameObject.GetComponent<SpriteRenderer>().material = lit;
-                Legs.GetComponent<SpriteRenderer>().material = lit;
-                Gun.GetComponent<SpriteRenderer>().material = lit;
-                Rocket.GetComponent<SpriteRenderer>().material = lit;
-            }
-            else
-            {
-                Debug.Log("Change to Def");
-                gameObject.GetComponent<SpriteRenderer>().material = def;
-                Legs.GetComponent<SpriteRenderer>().material = def;
-                Gun.GetComponent<SpriteRenderer>().material = def;
-                Rocket.GetComponent<SpriteRenderer>().material = def;
-            }
+            Debug.Log("Change to Lit");
+            gameObject.GetComponent<SpriteRenderer>().material = lit;
+            Legs.GetComponent<SpriteRenderer>().material = lit;
+            Gun.GetComponent<SpriteRenderer>().material = lit;
+            Rocket.GetComponent<SpriteRenderer>().material = lit;
+        }
+        else if (collision.gameObject.CompareTag("ToggleLight"))
+        {
+            Debug.Log("Change to Def");
+            gameObject.GetComponent<SpriteRenderer>().material = def;
+            Legs.GetComponent<SpriteRenderer>().material = def;
+            Gun.GetComponent<SpriteRenderer>().material = def;
+            Rocket.GetComponent<SpriteRenderer>().material = def;
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
-            Landing.Play();
+            Rocket.GetComponent<AudioSource>().Play();
 
         }
         if (collision.gameObject.CompareTag("Lamp"))
