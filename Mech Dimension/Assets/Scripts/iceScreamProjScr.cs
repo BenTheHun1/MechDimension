@@ -11,6 +11,7 @@ public class iceScreamProjScr : MonoBehaviour
     private float damage = 10f;
 
     private HealthSystem healthSystemScript;
+    private PlayerController playerControllerScript;
 
     public bool moveRight;
 
@@ -22,6 +23,7 @@ public class iceScreamProjScr : MonoBehaviour
     void Start()
     {
         healthSystemScript = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -51,6 +53,7 @@ public class iceScreamProjScr : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             healthSystemScript.damageMech(damage);
+            playerControllerScript.isFrozen = true;
             Destroy(gameObject);
         } else
         {
@@ -58,6 +61,13 @@ public class iceScreamProjScr : MonoBehaviour
         }
     }
 
+
+
+    IEnumerator freezePlaya()
+    {
+        yield return new WaitForSeconds(0.75f);
+        playerControllerScript.isFrozen = false;
+    }
 
 
 }

@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
     public GameObject enemyDisplayMovement;
     public GameObject enemyDisplayAttack;
 
+    public GameObject enemyDisplayDeath;
+
     private GameObject projectileToFire;
 
     public GameObject rightBounds;
@@ -54,6 +56,8 @@ public class Enemy : MonoBehaviour
     public GameObject iceScreamDisplayAttack;
     private float iceScreamAttackAnimLength = 1.5f;
 
+    public GameObject iceScreamDisplayDeath;
+
 
     //iceGoop
     public GameObject iceGoopDisplayIdle;
@@ -62,13 +66,16 @@ public class Enemy : MonoBehaviour
     private float iceGoopMoveLength = 2.5f;
     private float iceGoopAttackLength = 0.8f;
 
+    public GameObject iceGoopDisplayDeath;
+
     //forBeetle
     public GameObject forestBeetleDisplayIdle;
     public GameObject forestBeetleDisplayMovment;
     public GameObject forestBeetleDisplayAttack;
     private float forestBeetleAttackAnimLength = 0.8f;
     private float forestBeetleMovementAnimLength = 2.5f;
-    //same for this attack and move
+
+    //death anim needed!!!
 
 
     // Start is called before the first frame update
@@ -85,6 +92,7 @@ public class Enemy : MonoBehaviour
             range = 4;
             sight = 8;
             attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            enemyDisplayDeath = iceScreamDisplayDeath;
 
             //animation states
             var Idle = Instantiate(iceScreamDisplayIdle, enemyDisplayParent.transform);
@@ -92,6 +100,9 @@ public class Enemy : MonoBehaviour
             var Attack = Instantiate(iceScreamDisplayAttack, enemyDisplayParent.transform);
             enemyDisplayAttack = Attack;
             enemyDisplayAttack.gameObject.SetActive(false);
+            var Death = Instantiate(iceScreamDisplayDeath, enemyDisplayParent.transform);
+            enemyDisplayDeath = Death;
+            enemyDisplayDeath.gameObject.SetActive(false);
 
             //projectiles
             projectileToFire = iceScreamProjectilePrefab;
@@ -107,6 +118,7 @@ public class Enemy : MonoBehaviour
             attackAnimLength = iceGoopAttackLength;
             moveAnimLength = iceGoopMoveLength;
 
+
             //animation states
             var Idle = Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
             enemyDisplayIdle = Idle;
@@ -116,6 +128,9 @@ public class Enemy : MonoBehaviour
             var Attack = Instantiate(iceGoopDisplayAttack, enemyDisplayParent.transform);
             enemyDisplayAttack = Attack;
             enemyDisplayAttack.gameObject.SetActive(false);
+            var Death = Instantiate(iceGoopDisplayDeath, enemyDisplayParent.transform);
+            enemyDisplayDeath = Death;
+            enemyDisplayDeath.gameObject.SetActive(false);
         } else if (thisEnemyType.Equals(enemyType.forestBeetle))
         {
             //variables
@@ -143,6 +158,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetMouseButton(0))
+        {
+            enemyDies();
+        }
+
+
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
 
         if (thisEnemyType.Equals(enemyType.iceScream))
@@ -484,8 +505,11 @@ public class Enemy : MonoBehaviour
 
     void enemyDies()
     {
-        //do enemy death animation
-        //delete enemy
+        enemyDisplayAttack.gameObject.SetActive(false);
+        enemyDisplayIdle.gameObject.SetActive(false);
+        enemyDisplayMovement.gameObject.SetActive(false);
+        enemyDisplayDeath.gameObject.SetActive(true);
+        Destroy(gameObject, 0.8f);
     }
 
 
