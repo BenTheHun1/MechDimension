@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
 
     private bool isAttacking;
     private bool isMoving;
+    private bool isFacingRight;
 
     public GameObject enemyHead;
     public GameObject enemyDisplayParent;
@@ -58,13 +59,15 @@ public class Enemy : MonoBehaviour
     public GameObject iceGoopDisplayIdle;
     public GameObject iceGoopDisplayMovement;
     public GameObject iceGoopDisplayAttack;
-    //private float iceGoopMoveLength = 10000;          //work on these
-    //attack and move
+    private float iceGoopMoveLength = 2.5f;
+    private float iceGoopAttackLength = 0.8f;
 
     //forBeetle
     public GameObject forestBeetleDisplayIdle;
     public GameObject forestBeetleDisplayMovment;
     public GameObject forestBeetleDisplayAttack;
+    private float forestBeetleAttackAnimLength = 0.8f;
+    private float forestBeetleMovementAnimLength = 2.5f;
     //same for this attack and move
 
 
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
             //variables
             health = 20;
             damage = 2;
-            rateOfFire = 6;     //once every ___ seconds
+            rateOfFire = 6;
             range = 4;
             sight = 8;
             attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -98,9 +101,9 @@ public class Enemy : MonoBehaviour
             health = 15;
             damage = 8;
             rateOfFire = 2;
-            range = 1;
-            sight = 6;
-            movementSpeed = 2;
+            range = 0.5f;
+            sight = 2;
+            movementSpeed = 5f;
 
             //animation states
             var Idle = Instantiate(iceGoopDisplayIdle, enemyDisplayParent.transform);
@@ -117,32 +120,32 @@ public class Enemy : MonoBehaviour
             health = 20;
             damage = 10;
             rateOfFire = 2.5f;
-            range = 1;
-            sight = 5;
-            movementSpeed = 1.5f;
+            range = 0.5f;
+            sight = 2;
+            movementSpeed = 25f;
+            attackAnimLength = forestBeetleAttackAnimLength;
+            moveAnimLength = forestBeetleMovementAnimLength;
 
-            
-            //enemyDisplayIdle = forBeetleDisplayIdle;              //make sure to set it to active if its off
-            //enemyDisplayMovement = forBeetleDisplayMovment;
-            //enemyDisplayAttack = forBeetleDisplayAttack;
+            //animation states
+            var Idle = Instantiate(forestBeetleDisplayIdle, enemyDisplayParent.transform);
+            enemyDisplayIdle = Idle;
+            var Move = Instantiate(forestBeetleDisplayMovment, enemyDisplayParent.transform);
+            enemyDisplayMovement = Move;
+            enemyDisplayMovement.gameObject.SetActive(false);
+            var Attack = Instantiate(forestBeetleDisplayAttack, enemyDisplayParent.transform);
+            enemyDisplayAttack = Attack;
+            enemyDisplayAttack.gameObject.SetActive(false);
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(doRangedAttack());
-        }
-
-
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
-            doRangedScan();
+            //doRangedScan();
         } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))    //right? or?
         {
             doMeleeScan();
@@ -187,7 +190,12 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(attackAnimLength / 2);
 
 
-        Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);
+        Instantiate(projectileToFire, enemyHead.transform.position, enemyHead.transform.rotation);  //different 
+        //enemyHead.transform.rotation.Set(enemyHead.transform.rotation.x, 0, 0, 0);
+        //Debug.Log("Z = " + enemyHead.transform.rotation.z + " ...and... Y = " + enemyHead.transform.rotation.y);
+
+        //Quaternion angle = new Quaternion(enemyHead.transform.rotation.x, 0, 0, 0);
+        //Instantiate(projectileToFire, enemyHead.transform.position, angle);
 
         yield return new WaitForSeconds(attackAnimLength / 2);
 
@@ -207,6 +215,70 @@ public class Enemy : MonoBehaviour
     //MELEE STUFF BEGIN --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
     void doMeleeScan()
     {
+
+        //if can't find player
+        if(!isMoving && !isAttacking)
+        {
+            if(distanceToPlayer >= sight || Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) > 1)
+            {
+                defaultWalkDecider();
+            } else
+            {
+                //if player isn't within bounds, idle
+                if(playerControllerScript.transform.position.x < leftBounds.transform.position.x || playerControllerScript.transform.position.x > rightBounds.transform.position.x)
+                {
+                    if (playerControllerScript.transform.position.x > transform.position.x)
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                        isFacingRight = true;
+                    }
+                    else
+                    {
+                        enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                        isFacingRight = false;
+                    }
+                    enemyDisplayIdle.gameObject.SetActive(true);
+                    enemyDisplayAttack.gameObject.SetActive(false);
+                    enemyDisplayMovement.gameObject.SetActive(false);
+                } else
+                {
+                    if(distanceToPlayer > range)
+                    {
+                        if(playerControllerScript.transform.position.x > transform.position.x)
+                        {
+                            enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                            isFacingRight = true;
+                        } else
+                        {
+                            enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                            isFacingRight = false;
+                        }
+                        defaultWalkDecider();
+                    } else
+                    {
+                        if (playerControllerScript.transform.position.x > transform.position.x)
+                        {
+                            enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                            isFacingRight = true;
+                        }
+                        else
+                        {
+                            enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                            isFacingRight = false;
+                        }
+                        Debug.Log("Do Attack!");
+                        StartCoroutine(doMeleeAttack());
+                    }
+                }
+            }
+            
+        }
+
+
+
+
+        /*
+        Debug.Log("is scanning");
         if ((Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < sight / 2) && (distanceToPlayer <= sight))
         {
             if (distanceToPlayer <= range && !isAttacking && !isMoving)
@@ -257,20 +329,73 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        */
     }
+
+
+    void defaultWalkDecider()
+    {
+        if (!isMoving && !isAttacking)
+        {
+            if (transform.position.x > rightBounds.transform.position.x)
+            {
+                //switch and move left
+                enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                isFacingRight = false;
+                StartCoroutine(doMove(false));
+            }
+            else if (transform.position.x < leftBounds.transform.position.x)
+            {
+                //switch and move right
+                enemyDisplayParent.gameObject.transform.rotation = new Quaternion(0, 1, 0, 0);
+                isFacingRight = true;
+                StartCoroutine(doMove(true));
+            }
+            else if (isFacingRight)
+            {
+                //move right
+                StartCoroutine(doMove(true));
+            }
+            else
+            {
+                //move left
+                StartCoroutine(doMove(false));
+            }
+        }
+    }
+
+
+
+
+
+
+
 
     IEnumerator doMove(bool moveToTheRight)
     {
         isMoving = true;
-        
+        enemyDisplayMovement.gameObject.SetActive(true);
+        enemyDisplayIdle.gameObject.SetActive(false);
 
-        //use a while loop here
+        //do actual moving here
+        //transform.Translate(1, 0, 0);
+        for(int i = 0; i < movementSpeed; i++)
+        {
+            if (moveToTheRight)
+            {
+                transform.Translate(0.01f, 0, 0);
+                yield return new WaitForSeconds(moveAnimLength / 100);
+            }
+            else
+            {
+                transform.Translate(-0.01f, 0, 0);
+                yield return new WaitForSeconds(moveAnimLength / 100);
+            }
+        }
+        //enemyDisplayMovement.gameObject.SetActive(false);
+        //enemyDisplayIdle.gameObject.SetActive(true);
 
-
-        //make sure to enable ismoving now and set to false when not    //which way to move is crucial, and lerp to that area
-        //do move animation
-
-        yield return new WaitForSeconds(moveAnimLength);  //idk
+        //yield return new WaitForSeconds(moveAnimLength / 4);
         isMoving = false;
     }
 
@@ -278,13 +403,22 @@ public class Enemy : MonoBehaviour
     IEnumerator doMeleeAttack()
     {
         isAttacking = true;
+        enemyDisplayAttack.gameObject.SetActive(true);
+        enemyDisplayIdle.gameObject.SetActive(false);
+        enemyDisplayMovement.gameObject.SetActive(false);
 
-        //attack anim once
+        yield return new WaitForSeconds(attackAnimLength / 2);
+
+
         //if player is in range damage them
-        //wait till the attack ends
-        //stop attack anim
 
-        yield return new WaitForSeconds(rateOfFire);
+
+        yield return new WaitForSeconds(attackAnimLength / 2);
+        enemyDisplayAttack.gameObject.SetActive(false);
+        enemyDisplayIdle.gameObject.SetActive(true);
+
+        //this is to wait until the player can attack again
+        yield return new WaitForSeconds(rateOfFire - attackAnimLength);
         isAttacking = false;
     }
     //MELEE STUFF END   --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
