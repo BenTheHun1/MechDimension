@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Light;
     public GameObject TempControl;
     public GameObject Legs;
+    public GameObject Rocket;
     public AudioSource Landing;
     public Rigidbody2D rb;
 
@@ -41,6 +42,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             Gun.SetActive(false);
+        }
+        if (hasRocketJump)
+        {
+            Rocket.SetActive(true);
+        }
+        else
+        {
+            Rocket.SetActive(false);
         }
         if (hasTempControl)
         {
@@ -96,13 +105,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Vector2.left * speed * Time.deltaTime);
-            gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = true;
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(Vector2.right * speed * Time.deltaTime);
-            gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             left = false;
         }
 
@@ -111,8 +120,14 @@ public class PlayerController : MonoBehaviour
             jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             Legs.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<Animator>().SetBool("jumping", true);
+            Legs.GetComponent<Animator>().SetBool("jumping", true);
+            Gun.GetComponent<Animator>().SetBool("jumping", true);
+            Rocket.GetComponent<Animator>().SetBool("jumping", true);
+
+
         }
-        
+
         if (rb.velocity.x > 2 || rb.velocity.x < -2)
         {
             isMoving = true;
@@ -156,17 +171,27 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Change to Lit");
                 gameObject.GetComponent<SpriteRenderer>().material = lit;
+                Legs.GetComponent<SpriteRenderer>().material = lit;
+                Gun.GetComponent<SpriteRenderer>().material = lit;
+                Rocket.GetComponent<SpriteRenderer>().material = lit;
             }
             else
             {
                 Debug.Log("Change to Def");
                 gameObject.GetComponent<SpriteRenderer>().material = def;
+                Legs.GetComponent<SpriteRenderer>().material = def;
+                Gun.GetComponent<SpriteRenderer>().material = def;
+                Rocket.GetComponent<SpriteRenderer>().material = def;
             }
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
             Landing.Play();
 
+        }
+        if (collision.gameObject.CompareTag("Lamp"))
+        {
+            collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", true);
         }
     }
 
@@ -176,6 +201,10 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = false;
             
+        }
+        if (collision.gameObject.CompareTag("Lamp"))
+        {
+            collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", false);
         }
     }
 }

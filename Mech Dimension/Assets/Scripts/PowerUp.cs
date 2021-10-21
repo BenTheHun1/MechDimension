@@ -49,6 +49,7 @@ public class PowerUp : MonoBehaviour
             {
                 PlayerController.hasRocketJump = true;
                 pl.ReloadStats();
+                pl.Rocket.SetActive(true);
             }
             if (thisPowerUp == powerType.TempControl)
             {
