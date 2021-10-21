@@ -70,7 +70,7 @@ public class HealthSystem : MonoBehaviour
         HealthBarDisplay.gameObject.GetComponent<Image>().color = defaultHealthBarDisplayColor;
 
         yield return new WaitForSeconds(0.5f);
-        HealthBarDisplay.gameObject.GetComponent<Image>().color = Color.magenta;                //pick a better distress flash
+        HealthBarDisplay.gameObject.GetComponent<Image>().color = Color.black;                //pick a better distress flash
 
         yield return new WaitForSeconds(0.5f);
         HealthBarDisplay.gameObject.GetComponent<Image>().color = defaultHealthBarDisplayColor;
