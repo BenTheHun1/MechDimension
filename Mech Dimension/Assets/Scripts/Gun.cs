@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) && canShoot)
         {
             canShoot = false;
+            gameObject.GetComponent<AudioSource>().Play();
             Instantiate(bullet, point.position, point.rotation);
             StartCoroutine("Cooldown");
         }

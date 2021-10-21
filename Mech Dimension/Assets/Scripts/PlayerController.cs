@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Light;
     public GameObject TempControl;
     public GameObject Legs;
+    public AudioSource Landing;
     public Rigidbody2D rb;
 
     bool isMoving;
@@ -109,9 +110,10 @@ public class PlayerController : MonoBehaviour
         {
             jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            Legs.GetComponent<AudioSource>().Play();
         }
         
-        if (rb.velocity.x != 0)
+        if (rb.velocity.x > 2 || rb.velocity.x < -2)
         {
             isMoving = true;
         }
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<AudioSource>().Stop();
         }
 
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -5f, 5f), rb.velocity.y); //change 10f to whatever the real max is
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -141,12 +144,13 @@ public class PlayerController : MonoBehaviour
         {
             jumpsLeft = maxJumps;
             isOnGround = true;
+            
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Dark")) //Should probably be a drop, as going back and forth/jumping messes it up
+        if (collision.gameObject.CompareTag("Dark")) //Should probably be a drop, as going back and forth/jumping messes it up OR, have 2 triggers, that ontriggerexit changes things, instead of toggling back and forht with one trigger.
         {
             if (gameObject.GetComponent<Renderer>().sharedMaterial == def)
             {
@@ -159,6 +163,11 @@ public class PlayerController : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().material = def;
             }
         }
+        if (collision.gameObject.CompareTag("Untagged"))
+        {
+            Landing.Play();
+
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -166,7 +175,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Untagged"))
         {
             isOnGround = false;
-
+            
         }
     }
 }
