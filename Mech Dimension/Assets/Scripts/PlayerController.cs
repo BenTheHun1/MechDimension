@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private TempSystem tempSystemScript;
+    public TempSystem tempSystemScript;
 
 
     public float speed;
@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Gun;
     public GameObject Light;
-    public GameObject TempControl;
     public GameObject Legs;
     public GameObject Rocket;
     public Rigidbody2D rb;
+
 
     public bool debugJump;
 
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
+        tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
         if (hasGun)
@@ -65,11 +65,11 @@ public class PlayerController : MonoBehaviour
         }
         if (hasTempControl)
         {
-            TempControl.SetActive(true);
+            tempSystemScript.mechHasTempControlMod = true;
         }
         else
         {
-            TempControl.SetActive(false);
+            tempSystemScript.mechHasTempControlMod = false;
         }
         if (hasRocketJump || debugJump)
         {
@@ -216,6 +216,22 @@ public class PlayerController : MonoBehaviour
             Gun.GetComponent<SpriteRenderer>().material = def;
             Rocket.GetComponent<SpriteRenderer>().material = def;
         }
+        if (collision.gameObject.CompareTag("ToggleHeat"))
+        {
+            tempSystemScript.mechIsInHotArea = true;
+            tempSystemScript.mechIsInRegularArea = false;
+        }
+        if (collision.gameObject.CompareTag("ToggleCold"))
+        {
+            tempSystemScript.mechIsInColdArea = true;
+            tempSystemScript.mechIsInRegularArea = false;
+        }
+        if (collision.gameObject.CompareTag("ToggleNormal"))
+        {
+            tempSystemScript.mechIsInHotArea = false;
+            tempSystemScript.mechIsInColdArea = false;
+            tempSystemScript.mechIsInRegularArea = true;
+        }
         if (collision.gameObject.CompareTag("Untagged"))
         {
             Rocket.GetComponent<AudioSource>().Play();
@@ -224,7 +240,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Lamp"))
         {
             collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", true);
-            //tempSystemScript.mechIsInRegularArea = true;
+            tempSystemScript.mechIsInRegularArea = true;
         }
     }
 

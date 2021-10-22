@@ -8,7 +8,7 @@ public class iceScreamProjScr : MonoBehaviour
 
     private float speed = 1f;
 
-    private float damage = 5f;
+    private float damage = 10f;
 
     private HealthSystem healthSystemScript;
     private PlayerController playerControllerScript;
@@ -53,8 +53,8 @@ public class iceScreamProjScr : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             healthSystemScript.damageMech(damage);
-            playerControllerScript.isFrozen = true;
-            StartCoroutine(freezePlaya());
+            //playerControllerScript.isFrozen = true;
+            //StartCoroutine(freezePlaya());
             Destroy(gameObject);
         } else
         {
@@ -66,7 +66,7 @@ public class iceScreamProjScr : MonoBehaviour
 
     IEnumerator freezePlaya()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.25f);
         playerControllerScript.isFrozen = false;
     }
 

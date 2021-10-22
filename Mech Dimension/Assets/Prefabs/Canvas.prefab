@@ -1080,6 +1080,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9163001008217586184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593859924217554618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89138946e1854942b3a4fdb05cee16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelDisplay: {fileID: 6593859924651211311}
+  fuel: 0.75
 --- !u!1 &8694128147436846766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mechHealth: 50
-  mechMAXHealth: 50
   HealthBarDisplay: {fileID: 8694128148726134047}
   deathMenu: {fileID: 305270055}
 --- !u!1 &8694128148726134047
@@ -1624,8 +1637,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae9e84a9a9ba2b4e8626da337379463, type: 3}
+--- !u!114 &6593859924651211311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 889391714070354908, guid: aae9e84a9a9ba2b4e8626da337379463, type: 3}
+  m_PrefabInstance: {fileID: 6329204164044923379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6593859924217554621 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 889391713099564878, guid: aae9e84a9a9ba2b4e8626da337379463, type: 3}
+  m_PrefabInstance: {fileID: 6329204164044923379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6593859924217554618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 889391713099564873, guid: aae9e84a9a9ba2b4e8626da337379463, type: 3}
   m_PrefabInstance: {fileID: 6329204164044923379}
   m_PrefabAsset: {fileID: 0}
