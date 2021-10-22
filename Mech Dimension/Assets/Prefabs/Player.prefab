@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 595722768664053376}
   bullet: {fileID: 4992570160135800383, guid: 95208009ff0d57b44a98656cbb91ecb9, type: 3}
-  delay: 0.5
+  delay: 0.4
 --- !u!82 &1089558303
 AudioSource:
   m_ObjectHideFlags: 0
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64dc894bcb0917548be21d46a641d077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 1200
   jumpHeight: 11
   left: 0
   isOnGround: 0

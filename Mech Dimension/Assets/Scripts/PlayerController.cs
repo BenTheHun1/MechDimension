@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<AudioSource>().Stop();
         }
 
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -5f, 5f), rb.velocity.y); //change 10f to whatever the real max is
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -7f, 7f), rb.velocity.y); //change 10f to whatever the real max is
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -169,6 +169,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Enemy>().damageEnemy(20);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            Legs.GetComponent<AudioSource>().Play();
+        }
+
         if (collision.gameObject.CompareTag("ToggleDarkness")) //Should probably be a drop, as going back and forth/jumping messes it up OR, have 2 triggers, that ontriggerexit changes things, instead of toggling back and forht with one trigger.
         {
             Debug.Log("Change to Lit");
