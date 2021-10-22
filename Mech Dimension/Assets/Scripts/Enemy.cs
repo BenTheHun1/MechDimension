@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     private float forestBeetleAttackAnimLength = 0.8f;
     private float forestBeetleMovementAnimLength = 2.5f;
 
-    //death anim needed!!!
+    public GameObject forestBeetleDisplayDeath;
 
 
     // Start is called before the first frame update
@@ -152,6 +152,9 @@ public class Enemy : MonoBehaviour
             var Attack = Instantiate(forestBeetleDisplayAttack, enemyDisplayParent.transform);
             enemyDisplayAttack = Attack;
             enemyDisplayAttack.gameObject.SetActive(false);
+            var Death = Instantiate(forestBeetleDisplayDeath, enemyDisplayParent.transform);
+            enemyDisplayDeath = Death;
+            enemyDisplayDeath.gameObject.SetActive(false);
         }
     }
 
@@ -169,7 +172,7 @@ public class Enemy : MonoBehaviour
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
             doRangedScan();
-        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))    //right? or?
+        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))
         {
             doMeleeScan();
         }
