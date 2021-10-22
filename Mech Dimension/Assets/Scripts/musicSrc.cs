@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class musicSrc : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class musicSrc : MonoBehaviour
     public AudioClip SiFiTheme;
     public AudioClip hubTheme;
     public AudioClip forestTheme;
+
+    public AudioClip BadGuyIntro;
+    public AudioClip badGuyTheme;
 
 
 
@@ -20,13 +24,42 @@ public class musicSrc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            playIceTheme();
+        }
+
+
     }
 
 
-    void playIceTheme()
+    public void playIceTheme()
+    {
+        gameObject.GetComponent<AudioSource>().clip = iceTheme;
+        //gameObject.GetComponent<AudioSource>().Play
+    }
+
+    public void playHubTheme()
     {
 
     }
+
+
+    public void playSiFiTheme()
+    {
+
+    }
+
+    public void playForestTheme()
+    {
+
+    }
+
+    public void playBossTheme()
+    {
+
+    }
+
 
 }
