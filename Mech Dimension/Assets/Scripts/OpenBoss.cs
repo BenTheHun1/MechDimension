@@ -71,7 +71,7 @@ public class OpenBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && PlayerController.hasCrystal1 && PlayerController.hasCrystal2 && PlayerController.hasCrystal3)
         {
-            //SceneManager.LoadScene("Boss");
+            SceneManager.LoadScene("BossScene");
         }
     }
 
@@ -79,7 +79,7 @@ public class OpenBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            //SceneManager.LoadScene("Boss");
+            SceneManager.LoadScene("BossScene");
         }
     }
 }
