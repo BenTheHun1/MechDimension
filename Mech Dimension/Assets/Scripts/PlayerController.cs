@@ -19,6 +19,12 @@ public class PlayerController : MonoBehaviour
     public static bool hasLight;
     public static bool hasTempControl;
 
+    public static bool hasFuelUpgrade1;
+    public static bool hasFuelUpgrade2;
+    public static bool hasHPUpgrade1;
+    public static bool hasHPUpgrade2;
+
+
     public Material lit;
     public Material def;
 
