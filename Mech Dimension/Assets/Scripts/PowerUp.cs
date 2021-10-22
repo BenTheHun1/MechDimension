@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PowerUp : MonoBehaviour
 {
     PlayerController pl;
+    Animator poofs;
     Fuel fp;
     HealthSystem hp;
     
@@ -15,7 +16,13 @@ public class PowerUp : MonoBehaviour
     }
 
     public powerType thisPowerUp;
-
+    public Sprite gunIcon;
+    public Sprite jumpIcon;
+    public Sprite lightIcon;
+    public Sprite rocketIcon;
+    public Sprite tempIcon;
+    public Sprite fuelIcon;
+    public Sprite healthIcon;
 
 
     // Start is called before the first frame update
@@ -28,6 +35,36 @@ public class PowerUp : MonoBehaviour
         pl = GameObject.Find("Player").GetComponent<PlayerController>();
         fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
         hp = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
+        poofs = GameObject.Find("UpgradePoof").GetComponent<Animator>();
+
+        if (thisPowerUp == powerType.Gun)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = gunIcon;
+        }
+        else if (thisPowerUp == powerType.Jump)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = jumpIcon;
+        }
+        else if (thisPowerUp == powerType.Light)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = lightIcon;
+        }
+        else if (thisPowerUp == powerType.Rocket)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = rocketIcon;
+        }
+        else if (thisPowerUp == powerType.TempControl)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = tempIcon;
+        }
+        else if (thisPowerUp == powerType.FuelUpgrade1 || thisPowerUp == powerType.FuelUpgrade2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = fuelIcon;
+        }
+        else if (thisPowerUp == powerType.HealthUpgrade1 || thisPowerUp == powerType.HealthUpgrade2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = healthIcon;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -85,7 +122,7 @@ public class PowerUp : MonoBehaviour
                 hp.healMech(25f);
                 PlayerController.hasHPUpgrade2 = true;
             }
-
+            poofs.SetTrigger("pooof");
             Destroy(gameObject);
         }
     }
