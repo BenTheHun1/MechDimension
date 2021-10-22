@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4245500328226277865}
   - component: {fileID: 4245500328226277864}
+  - component: {fileID: 1166505792}
   m_Layer: 0
   m_Name: musicManager
   m_TagString: Untagged
@@ -127,3 +128,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1166505792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245500328226277782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da770a193a5e42498fca36120f9c986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iceTheme: {fileID: 8300000, guid: 20c08da8eb06dc94da8a1792a1eae89d, type: 3}
+  SiFiTheme: {fileID: 8300000, guid: 48c37fd67a0426e4fbe20984d5289bf1, type: 3}
+  hubTheme: {fileID: 8300000, guid: ad7650296931c7845b7b88738399552a, type: 3}
+  forestTheme: {fileID: 8300000, guid: fe542f245ddb81b47a99568ba11bf304, type: 3}
+  BadGuyIntro: {fileID: 8300000, guid: 519d7cb33eb8fb3479fb627c8cad7afe, type: 3}
+  badGuyTheme: {fileID: 8300000, guid: 8ebd21e18406dae4eaedecf4e2a23a4b, type: 3}
