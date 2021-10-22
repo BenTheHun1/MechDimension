@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: 437bf6c9106c547478fd6940883d9f0f
+guid: 219c703544b35de4380d39300c1b8657
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5956551894365022370
-    second: JetpackRunning_0
+      213: -6796084087126989118
+    second: Jetpack1_2_0
   - first:
-      213: -749390848277721570
-    second: JetpackRunning_1
+      213: -1416561320389081323
+    second: Jetpack1_2_1
   - first:
-      213: 7300497121254664489
-    second: JetpackRunning_2
+      213: 3571479322341079107
+    second: Jetpack1_2_2
   - first:
-      213: -8856779862345513984
-    second: JetpackRunning_3
-  - first:
-      213: 2231925952101868654
-    second: JetpackRunning_4
-  - first:
-      213: 5827696688782562421
-    second: JetpackRunning_5
-  - first:
-      213: 556728269127058598
-    second: JetpackRunning_6
-  - first:
-      213: -1257852359041017652
-    second: JetpackRunning_7
+      213: 4768537381351777742
+    second: Jetpack1_2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,91 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JetpackRunning_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e57513a7c93165da0800000000000000
-      internalID: -5956551894365022370
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JetpackRunning_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1e4a727ef0a995f0800000000000000
-      internalID: -749390848277721570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JetpackRunning_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 929652cb373905560800000000000000
-      internalID: 7300497121254664489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JetpackRunning_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0040013f3a5661580800000000000000
-      internalID: -8856779862345513984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JetpackRunning_4
+      name: Jetpack1_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -213,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e64e10404d469fe10800000000000000
-      internalID: 2231925952101868654
+      spriteID: 2c66c1ba7857fa1a0800000000000000
+      internalID: -6796084087126989118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JetpackRunning_5
+      name: Jetpack1_2_1
       rect:
         serializedVersion: 2
         x: 64
@@ -234,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 574da91134320e050800000000000000
-      internalID: 5827696688782562421
+      spriteID: 51786affbfc575ce0800000000000000
+      internalID: -1416561320389081323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JetpackRunning_6
+      name: Jetpack1_2_2
       rect:
         serializedVersion: 2
         x: 128
@@ -255,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a48cbd3965e9b700800000000000000
-      internalID: 556728269127058598
+      spriteID: 348faca6581709130800000000000000
+      internalID: 3571479322341079107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JetpackRunning_7
+      name: Jetpack1_2_3
       rect:
         serializedVersion: 2
         x: 192
@@ -276,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc8197f91f53b8ee0800000000000000
-      internalID: -1257852359041017652
+      spriteID: ec5e4a9cb7f3d2240800000000000000
+      internalID: 4768537381351777742
       vertices: []
       indices: 
       edges: []
