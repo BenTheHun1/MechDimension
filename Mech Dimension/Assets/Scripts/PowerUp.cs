@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour
     Animator poofs;
     Fuel fp;
     HealthSystem hp;
+    OpenBoss boss;
     
     public enum powerType
     {
@@ -37,6 +38,7 @@ public class PowerUp : MonoBehaviour
         fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
         hp = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
         poofs = GameObject.Find("UpgradePoof").GetComponent<Animator>();
+        //boss = GameObject.Find("OpenBoss").GetComponent<OpenBoss>();
 
         if (thisPowerUp == powerType.Gun)
         {
@@ -129,14 +131,17 @@ public class PowerUp : MonoBehaviour
             if(thisPowerUp == powerType.Crystal1)
             {
                 PlayerController.hasCrystal1 = true;
+                boss.UpdateCrystal();
             }
             if (thisPowerUp == powerType.Crystal2)
             {
                 PlayerController.hasCrystal2 = true;
+                boss.UpdateCrystal();
             }
             if (thisPowerUp == powerType.Crystal3)
             {
                 PlayerController.hasCrystal3 = true;
+                boss.UpdateCrystal();
             }
 
             poofs.SetTrigger("pooof");
