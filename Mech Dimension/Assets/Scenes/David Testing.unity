@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &298023079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1971241488, guid: 8f690ad7fbb7458438590177326c6e9d, type: 3}
+  m_PrefabInstance: {fileID: 8694128147722301189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310272067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2081,8 +2086,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7675891953435114959, guid: 2bfa582c0e62d134aaaaa49920a57e45, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 710495934}
+    - target: {fileID: 7675891953435114959, guid: 2bfa582c0e62d134aaaaa49920a57e45, type: 3}
+      propertyPath: congratsUI
+      value: 
+      objectReference: {fileID: 1084475249}
+    - target: {fileID: 7675891953435114959, guid: 2bfa582c0e62d134aaaaa49920a57e45, type: 3}
+      propertyPath: bossBattleUI
+      value: 
+      objectReference: {fileID: 298023079}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bfa582c0e62d134aaaaa49920a57e45, type: 3}
+--- !u!1 &710495934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 509589651, guid: 8f690ad7fbb7458438590177326c6e9d, type: 3}
+  m_PrefabInstance: {fileID: 8694128147722301189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &769965705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,6 +2207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce1f87265a67c7446a5a02a976a860d4, type: 3}
+--- !u!1 &1084475249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 804581516, guid: 8f690ad7fbb7458438590177326c6e9d, type: 3}
+  m_PrefabInstance: {fileID: 8694128147722301189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1541900610
 PrefabInstance:
   m_ObjectHideFlags: 0
