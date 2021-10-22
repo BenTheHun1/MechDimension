@@ -195,7 +195,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().damageEnemy(20);
+            Debug.Log(collision.transform.parent.parent.gameObject.name);
+            collision.gameObject.transform.parent.parent.gameObject.GetComponent<Enemy>().damageEnemy(20f);
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             Legs.GetComponent<AudioSource>().Play();
         }
