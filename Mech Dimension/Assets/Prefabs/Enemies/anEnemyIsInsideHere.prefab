@@ -384,4 +384,8 @@ MonoBehaviour:
   forestBeetleDisplayIdle: {fileID: 6503990681684078504, guid: c670a3f5057b89348be4ebb7c6e10f59, type: 3}
   forestBeetleDisplayMovment: {fileID: 8116909162065171140, guid: ffd0c34e89c413b41bfc51e8c45ff862, type: 3}
   forestBeetleDisplayAttack: {fileID: 4694114984360054570, guid: 685bdee0b1bfebf41a30d436bc5f0a1b, type: 3}
-  forestBeetleDisplayDeath: {fileID: 0}
+  forestBeetleDisplayDeath: {fileID: 194714130733726899, guid: 727137c8a64a1024688aa1682ce59ae4, type: 3}
+  plantProjectilePrefab: {fileID: 2142036027358178774, guid: 98743cddd842c3548af7d7d3a34cc162, type: 3}
+  plantDisplayIdle: {fileID: 6536526772345815458, guid: 96c68a732ca936041ab57f5982a3dea3, type: 3}
+  plantDisplayAttack: {fileID: 3447507146371060222, guid: 5e524f242b750b74bb6fc676f604438f, type: 3}
+  forestPlantDisplayDeath: {fileID: 8220924708862459694, guid: 5e13fe8aa63793b4a9ff0f086365f8d2, type: 3}
