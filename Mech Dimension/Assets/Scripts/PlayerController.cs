@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public static bool hasHPUpgrade1;
     public static bool hasHPUpgrade2;
 
+    public static bool hasCrystal1;
+    public static bool hasCrystal2;
+    public static bool hasCrystal3;
+
 
     public Material lit;
     public Material def;

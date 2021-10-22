@@ -12,7 +12,7 @@ public class PowerUp : MonoBehaviour
     
     public enum powerType
     {
-        Gun, Jump, Light, Rocket, TempControl, FuelUpgrade1, FuelUpgrade2, HealthUpgrade1, HealthUpgrade2, crystal
+        Gun, Jump, Light, Rocket, TempControl, FuelUpgrade1, FuelUpgrade2, HealthUpgrade1, HealthUpgrade2, Crystal1, Crystal2, Crystal3
     }
 
     public powerType thisPowerUp;
@@ -29,7 +29,7 @@ public class PowerUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if ((PlayerController.hasGun && thisPowerUp == powerType.Gun) || (PlayerController.hasJump && thisPowerUp == powerType.Jump) || (PlayerController.hasLight && thisPowerUp == powerType.Light) || (PlayerController.hasRocketJump && thisPowerUp == powerType.Rocket) || (PlayerController.hasTempControl && thisPowerUp == powerType.TempControl) || (PlayerController.hasFuelUpgrade1 && thisPowerUp == powerType.FuelUpgrade1) || (PlayerController.hasFuelUpgrade2 && thisPowerUp == powerType.FuelUpgrade2) || (PlayerController.hasHPUpgrade1 && thisPowerUp == powerType.HealthUpgrade1) || (PlayerController.hasHPUpgrade2 && thisPowerUp == powerType.HealthUpgrade2))
+        if ((PlayerController.hasGun && thisPowerUp == powerType.Gun) || (PlayerController.hasJump && thisPowerUp == powerType.Jump) || (PlayerController.hasLight && thisPowerUp == powerType.Light) || (PlayerController.hasRocketJump && thisPowerUp == powerType.Rocket) || (PlayerController.hasTempControl && thisPowerUp == powerType.TempControl) || (PlayerController.hasFuelUpgrade1 && thisPowerUp == powerType.FuelUpgrade1) || (PlayerController.hasFuelUpgrade2 && thisPowerUp == powerType.FuelUpgrade2) || (PlayerController.hasHPUpgrade1 && thisPowerUp == powerType.HealthUpgrade1) || (PlayerController.hasHPUpgrade2 && thisPowerUp == powerType.HealthUpgrade2) || (PlayerController.hasCrystal1 && thisPowerUp == powerType.Crystal1) || (PlayerController.hasCrystal2 && thisPowerUp == powerType.Crystal2) || (PlayerController.hasCrystal3 && thisPowerUp == powerType.Crystal3))
         {
             Destroy(gameObject);
         }
@@ -65,7 +65,7 @@ public class PowerUp : MonoBehaviour
         else if (thisPowerUp == powerType.HealthUpgrade1 || thisPowerUp == powerType.HealthUpgrade2)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = healthIcon;
-        } else if(thisPowerUp == powerType.crystal)
+        } else if(thisPowerUp == powerType.Crystal1 || thisPowerUp == powerType.Crystal2 || thisPowerUp == powerType.Crystal3)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = crystalIcon;
         }
@@ -126,13 +126,17 @@ public class PowerUp : MonoBehaviour
                 hp.healMech(25f);
                 PlayerController.hasHPUpgrade2 = true;
             }
-            if(thisPowerUp == powerType.crystal)
+            if(thisPowerUp == powerType.Crystal1)
             {
-                pl.iHaveThisManyCrystals += 1;
-                if(pl.iHaveThisManyCrystals >= 3)
-                {
-                    //THIS SHOULD SUMMON ENEMY
-                }
+                PlayerController.hasCrystal1 = true;
+            }
+            if (thisPowerUp == powerType.Crystal2)
+            {
+                PlayerController.hasCrystal2 = true;
+            }
+            if (thisPowerUp == powerType.Crystal3)
+            {
+                PlayerController.hasCrystal3 = true;
             }
 
             poofs.SetTrigger("pooof");
