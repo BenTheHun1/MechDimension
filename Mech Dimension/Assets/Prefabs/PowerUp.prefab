@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f062b28826c9e4eb24bdfa87710c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisPowerUp: 0
+  thisPowerUp: 9
   gunIcon: {fileID: -4380351839555027134, guid: 27ccd8136da325e4cb622ee22dab393a, type: 3}
   jumpIcon: {fileID: 6935382693716724204, guid: 05a0afcf2baae394e88140c8ef4b234d, type: 3}
   lightIcon: {fileID: 21300000, guid: 126abfea3fd47c845ab173d90f4fdec8, type: 3}
@@ -120,3 +120,4 @@ MonoBehaviour:
   tempIcon: {fileID: 21300000, guid: 70a8ab135a6afd84098c98668a9ad337, type: 3}
   fuelIcon: {fileID: 21300000, guid: 8d6a8a2fdbbde8446bc71983e705e312, type: 3}
   healthIcon: {fileID: 21300000, guid: 3ad4ac9c056c9e54ab28959b1912d2a6, type: 3}
+  crystalIcon: {fileID: 21300000, guid: 0ebf53f12aec46b44aae7795bfdb0538, type: 3}

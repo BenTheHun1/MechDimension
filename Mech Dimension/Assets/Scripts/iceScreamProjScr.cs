@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class iceScreamProjScr : MonoBehaviour
 {
-    private float freezeTime = 0.5f;
+    //private float freezeTime = 0.5f;
 
     private float speed = 1f;
 

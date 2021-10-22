@@ -12,7 +12,7 @@ public class PowerUp : MonoBehaviour
     
     public enum powerType
     {
-        Gun, Jump, Light, Rocket, TempControl, FuelUpgrade1, FuelUpgrade2, HealthUpgrade1, HealthUpgrade2
+        Gun, Jump, Light, Rocket, TempControl, FuelUpgrade1, FuelUpgrade2, HealthUpgrade1, HealthUpgrade2, crystal
     }
 
     public powerType thisPowerUp;
@@ -23,6 +23,7 @@ public class PowerUp : MonoBehaviour
     public Sprite tempIcon;
     public Sprite fuelIcon;
     public Sprite healthIcon;
+    public Sprite crystalIcon;
 
 
     // Start is called before the first frame update
@@ -64,6 +65,9 @@ public class PowerUp : MonoBehaviour
         else if (thisPowerUp == powerType.HealthUpgrade1 || thisPowerUp == powerType.HealthUpgrade2)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = healthIcon;
+        } else if(thisPowerUp == powerType.crystal)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = crystalIcon;
         }
     }
 
@@ -122,6 +126,15 @@ public class PowerUp : MonoBehaviour
                 hp.healMech(25f);
                 PlayerController.hasHPUpgrade2 = true;
             }
+            if(thisPowerUp == powerType.crystal)
+            {
+                pl.iHaveThisManyCrystals += 1;
+                if(pl.iHaveThisManyCrystals >= 3)
+                {
+                    //THIS SHOULD SUMMON ENEMY
+                }
+            }
+
             poofs.SetTrigger("pooof");
             Destroy(gameObject);
         }

@@ -10,6 +10,7 @@ public class Boss_Scr : MonoBehaviour
 
     public GameObject bossBattleUI;
     public GameObject healthBar;
+    public GameObject congratsUI;
 
     private bool attackInProgress;
 
@@ -452,7 +453,17 @@ public class Boss_Scr : MonoBehaviour
 
         deathAnim.gameObject.SetActive(true);
 
+
         Destroy(gameObject, 4.0f);
+        StartCoroutine(death());
+
     }
+
+    IEnumerator death()
+    {
+        yield return new WaitForSeconds(3.5f);
+        congratsUI.gameObject.SetActive(true);
+    }
+
 
 }
