@@ -15,6 +15,7 @@ public class HealthSystem : MonoBehaviour
 
     private Color defaultHealthBarDisplayColor;
 
+    public GameObject deathMenu;
 
 
 
@@ -87,7 +88,7 @@ public class HealthSystem : MonoBehaviour
     void mechDies()
     {
         //disable being able to move the character.
-        //enable dead menu
+        deathMenu.gameObject.SetActive(true);
     }
 
 
