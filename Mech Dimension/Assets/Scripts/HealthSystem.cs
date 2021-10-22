@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float mechHealth = 50;
+    float mechHealth;
 
     public static float mechMAXHealth = 50;
 
@@ -17,11 +17,17 @@ public class HealthSystem : MonoBehaviour
 
     public GameObject deathMenu;
 
+    public Fuel fp;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
+        Debug.Log(mechMAXHealth);
+        mechHealth = mechMAXHealth;
+        healMech(1f);
         defaultHealthBarDisplayColor = HealthBarDisplay.gameObject.GetComponent<Image>().color;
     }
 
@@ -88,8 +94,7 @@ public class HealthSystem : MonoBehaviour
 
     void mechDies()
     {
-        //disable being able to move the character.
-        deathMenu.gameObject.SetActive(true);
+        fp.fuel = 0;
     }
 
 
