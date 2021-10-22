@@ -82,7 +82,8 @@ public class Enemy : MonoBehaviour
     public GameObject plantProjectilePrefab;
     public GameObject plantDisplayIdle;
     public GameObject plantDisplayAttack;
-    //private float plantAttackAnimLength = 1.5f;
+    public GameObject plantDisplayDeath;
+    private float plantAttackAnimLength = 1.0f;
 
     public GameObject forestPlantDisplayDeath;
 
@@ -94,18 +95,17 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();      //not until it is in the scene
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
             //variables
             health = 20;
             damage = 2;
-            rateOfFire = 6;
+            rateOfFire = 3f;
             range = 4;
             sight = 8;
-            attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            enemyDisplayDeath = iceScreamDisplayDeath;
+            attackAnimLength = iceScreamAttackAnimLength;
 
             //animation states
             var Idle = Instantiate(iceScreamDisplayIdle, enemyDisplayParent.transform);
@@ -124,7 +124,7 @@ public class Enemy : MonoBehaviour
             //variables
             health = 15;
             damage = 8;
-            rateOfFire = 2;
+            rateOfFire = 1.5f;
             range = 0.3f;
             sight = 2;
             movementSpeed = 5f;
@@ -168,34 +168,42 @@ public class Enemy : MonoBehaviour
             var Death = Instantiate(forestBeetleDisplayDeath, enemyDisplayParent.transform);
             enemyDisplayDeath = Death;
             enemyDisplayDeath.gameObject.SetActive(false);
-        } else if (thisEnemyType.Equals(enemyType.forestBeetle))
+        } else if (thisEnemyType.Equals(enemyType.forestPlant))
         {
             //variables
             health = 15;
             damage = 2;
-            rateOfFire = 6;
+            rateOfFire = 2.5f;
             range = 4;
             sight = 8;
-            //attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //enemyDisplayDeath = iceScreamDisplayDeath;
+            attackAnimLength = plantAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
             //animation states
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!
+            var Idle = Instantiate(plantDisplayIdle, enemyDisplayParent.transform);
+            enemyDisplayIdle = Idle;
+            var Attack = Instantiate(plantDisplayAttack, enemyDisplayParent.transform);
+            enemyDisplayAttack = Attack;
+            enemyDisplayAttack.gameObject.SetActive(false);
+            var Death = Instantiate(plantDisplayDeath, enemyDisplayParent.transform);
+            enemyDisplayDeath = Death;
+            enemyDisplayDeath.gameObject.SetActive(false);
 
 
-
+            //projectiles
+            projectileToFire = plantProjectilePrefab;
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             enemyDies();
         }
+
 
 
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
@@ -253,31 +261,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-
-
-                /*
-                if (distanceToPlayer <= sight)
-                {
-                    //makes the head look at the player
-                    enemyHead.gameObject.transform.LookAt(playerControllerScript.transform);
-
-                    //makes the body look in the general direction of the player
-                    if (playerControllerScript.transform.position.x > transform.position.x)
-                    {
-                        enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;    //it might be the oposite of this.
-                    }
-                    else
-                    {
-                        enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    }
-
-                    //attacks if in range
-                    if (distanceToPlayer <= range && !isAttacking)
-                    {
-                        StartCoroutine(doRangedAttack());
-                    }
-                }
-                */
             }
 
     IEnumerator doRangedAttack()
@@ -382,63 +365,6 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-
-
-
-
-        /*
-        Debug.Log("is scanning");
-        if ((Mathf.Abs(playerControllerScript.transform.position.y - transform.position.y) < sight / 2) && (distanceToPlayer <= sight))
-        {
-            if (distanceToPlayer <= range && !isAttacking && !isMoving)
-            {
-                StartCoroutine(doMeleeAttack());
-            } else
-            {
-                if(transform.position.x < rightBounds.transform.position.x || transform.position.x > leftBounds.transform.position.x && !isMoving && !isAttacking)
-                {
-                    if (playerControllerScript.transform.position.x > transform.position.x)
-                    {
-                            StartCoroutine(doMove(true));   //move right        START COROUTINE!!!
-                    }
-                    else
-                    {
-                        StartCoroutine(doMove(false));  //move left
-                    }
-                }
-            }
-
-        }
-        else
-        {
-            //if you are too far left or right switch and go other direction
-            if(transform.position.x >= rightBounds.transform.position.x && !isMoving && !isAttacking)
-            {
-                //switch and start moving left
-                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                StartCoroutine(doMove(false));
-                
-            } else if(transform.position.x <= leftBounds.transform.position.x && !isMoving && !isAttacking)
-            {
-                //switch and start moving right
-                enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                StartCoroutine(doMove(true));
-
-                //otherwise go the direction you are facing
-            } else if(!isMoving && !isAttacking)
-            {
-                if(enemyDisplayParent.gameObject.GetComponent<SpriteRenderer>().flipX == false)
-                {
-                    //move left
-                    StartCoroutine(doMove(false));
-                } else
-                {
-                    //move right
-                    StartCoroutine(doMove(true));
-                }
-            }
-        }
-        */
     }
 
 
@@ -541,9 +467,12 @@ public class Enemy : MonoBehaviour
     {
         enemyDisplayAttack.gameObject.SetActive(false);
         enemyDisplayIdle.gameObject.SetActive(false);
-        enemyDisplayMovement.gameObject.SetActive(false);
+        if(enemyDisplayMovement != null)
+        {
+            enemyDisplayMovement.gameObject.SetActive(false);
+        }
         enemyDisplayDeath.gameObject.SetActive(true);
-        Destroy(gameObject, 0.8f);
+        Destroy(gameObject, 1.2f);
     }
 
 
