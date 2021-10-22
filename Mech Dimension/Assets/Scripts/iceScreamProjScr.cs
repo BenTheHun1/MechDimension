@@ -8,7 +8,7 @@ public class iceScreamProjScr : MonoBehaviour
 
     private float speed = 1f;
 
-    private float damage = 10f;
+    private float damage = 5f;
 
     private HealthSystem healthSystemScript;
     private PlayerController playerControllerScript;
@@ -54,6 +54,7 @@ public class iceScreamProjScr : MonoBehaviour
         {
             healthSystemScript.damageMech(damage);
             playerControllerScript.isFrozen = true;
+            StartCoroutine(freezePlaya());
             Destroy(gameObject);
         } else
         {
