@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166088414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.79, z: 0}
+  m_LocalPosition: {x: -4.399, y: -0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7675891953435114958}
@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593483751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.79, z: 0}
+  m_LocalPosition: {x: 4.319, y: -1.817, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7675891953435114958}
@@ -809,6 +809,8 @@ MonoBehaviour:
   plant: {fileID: 5945498150024484724, guid: 1245ba1e01d25c641965a47d185e15af, type: 3}
   scream: {fileID: 3287713449701678743, guid: 534655ef086f7264ab350713a7848db3, type: 3}
   spawnPosdMove: {fileID: 974499465}
+  spawnPodStat: {fileID: 1166088414}
+  spawnPosStat2: {fileID: 1593483751}
 --- !u!212 &7675891953435114960
 SpriteRenderer:
   m_ObjectHideFlags: 0
