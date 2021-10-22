@@ -793,7 +793,6 @@ Transform:
   - {fileID: 804809406}
   - {fileID: 570351306}
   - {fileID: 7976002799439238303}
-  - {fileID: 1538389737}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -810,6 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempSystemScript: {fileID: 0}
+  iHaveThisManyCrystals: 0
   speed: 1200
   jumpHeight: 11
   left: 0
@@ -824,6 +824,7 @@ MonoBehaviour:
   Legs: {fileID: 570351305}
   Rocket: {fileID: 7931232576927627872}
   rb: {fileID: 595722770057064895}
+  music: {fileID: 0}
   debugJump: 0
 --- !u!70 &595722770057064894
 CapsuleCollider2D:

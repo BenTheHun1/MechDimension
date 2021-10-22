@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Legs;
     public GameObject Rocket;
     public Rigidbody2D rb;
-
+    public musicSrc music;
 
     public bool debugJump;
 
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
+        music = GameObject.Find("musicManager").GetComponent<musicSrc>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
         if (hasGun)
@@ -212,6 +213,7 @@ public class PlayerController : MonoBehaviour
             Legs.GetComponent<SpriteRenderer>().material = lit;
             Gun.GetComponent<SpriteRenderer>().material = lit;
             Rocket.GetComponent<SpriteRenderer>().material = lit;
+            music.playSiFiTheme();
         }
         else if (collision.gameObject.CompareTag("ToggleLight"))
         {
@@ -220,22 +222,26 @@ public class PlayerController : MonoBehaviour
             Legs.GetComponent<SpriteRenderer>().material = def;
             Gun.GetComponent<SpriteRenderer>().material = def;
             Rocket.GetComponent<SpriteRenderer>().material = def;
+            music.playHubTheme();
         }
         if (collision.gameObject.CompareTag("ToggleHeat"))
         {
             tempSystemScript.mechIsInHotArea = true;
             tempSystemScript.mechIsInRegularArea = false;
+            music.playForestTheme();
         }
         if (collision.gameObject.CompareTag("ToggleCold"))
         {
             tempSystemScript.mechIsInColdArea = true;
             tempSystemScript.mechIsInRegularArea = false;
+            music.playIceTheme();
         }
         if (collision.gameObject.CompareTag("ToggleNormal"))
         {
             tempSystemScript.mechIsInHotArea = false;
             tempSystemScript.mechIsInColdArea = false;
             tempSystemScript.mechIsInRegularArea = true;
+            music.playHubTheme();
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
