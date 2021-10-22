@@ -92274,6 +92274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampBoi (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -92538,6 +92542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampBoi (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -92599,6 +92607,10 @@ PrefabInstance:
     - target: {fileID: 4435741765214541450, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_Name
       value: LampBoi (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
@@ -92727,6 +92739,10 @@ PrefabInstance:
     - target: {fileID: 4435741765214541450, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_Name
       value: LampBoi (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
@@ -92996,6 +93012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampBoi (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -93198,6 +93218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampBoi (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -93330,6 +93354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampBoi
       objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -93391,6 +93419,10 @@ PrefabInstance:
     - target: {fileID: 4435741765214541450, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_Name
       value: LampBoi (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435741765214541460, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
       propertyPath: m_RootOrder
