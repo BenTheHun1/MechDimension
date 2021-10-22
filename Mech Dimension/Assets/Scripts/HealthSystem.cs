@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviour
 {
     public float mechHealth = 50;
 
-    public float mechMAXHealth = 50;
+    public static float mechMAXHealth = 50;
 
     public GameObject HealthBarDisplay;
 
