@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
         {
             //variables
             health = 15;
-            damage = 12;
+            damage = 12f;
             rateOfFire = 2.5f;
             range = .75f;
             sight = 1.5f;
