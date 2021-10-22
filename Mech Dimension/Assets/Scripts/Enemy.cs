@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
         iceGoop,
         forestBeetle,
         forestPlant,
-        SiFiEnemy1,
+        SiFiRobot,
         SiFiEnemy2,
     }
 
@@ -87,7 +87,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject forestPlantDisplayDeath;
 
-
+    //for Robot
+    public GameObject RobotDisplayIdle;
+    public GameObject RobotDisplayAttack;
+    public GameObject RobotDisplayMove;
+    public GameObject RobotDisplayDeath;
+    private float SiFiRobotMoveAnimLength = 2.5f;
+    private float SiFiRobotAttackAnimLength = 0.8f;
 
 
 
@@ -101,7 +107,7 @@ public class Enemy : MonoBehaviour
         {
             //variables
             health = 20;
-            damage = 2;
+            damage = 5;
             rateOfFire = 3f;
             range = 4;
             sight = 8;
@@ -148,7 +154,7 @@ public class Enemy : MonoBehaviour
         {
             //variables
             health = 20;
-            damage = 10;
+            damage = 11;
             rateOfFire = 2.5f;
             range = 0.5f;
             sight = 2;
@@ -172,7 +178,7 @@ public class Enemy : MonoBehaviour
         {
             //variables
             health = 15;
-            damage = 2;
+            damage = 7;
             rateOfFire = 2.5f;
             range = 4;
             sight = 8;
@@ -193,25 +199,44 @@ public class Enemy : MonoBehaviour
 
             //projectiles
             projectileToFire = plantProjectilePrefab;
+        } else if (thisEnemyType.Equals(enemyType.SiFiRobot))
+        {
+            //variables
+            health = 15;
+            damage = 12;
+            rateOfFire = 2.5f;
+            range = .75f;
+            sight = 1.5f;
+            movementSpeed = 25;
+            attackAnimLength = SiFiRobotAttackAnimLength;
+            moveAnimLength = SiFiRobotMoveAnimLength;
+
+
+            //animation states
+            var Idle = Instantiate(RobotDisplayIdle, enemyDisplayParent.transform);
+            enemyDisplayIdle = Idle;
+            var Attack = Instantiate(RobotDisplayAttack, enemyDisplayParent.transform);
+            enemyDisplayAttack = Attack;
+            enemyDisplayAttack.gameObject.SetActive(false);
+            var Move = Instantiate(RobotDisplayMove, enemyDisplayParent.transform);
+            enemyDisplayMovement = Move;
+            enemyDisplayMovement.gameObject.SetActive(false);
+            var Death = Instantiate(RobotDisplayDeath, enemyDisplayParent.transform);
+            enemyDisplayDeath = Death;
+            enemyDisplayDeath.gameObject.SetActive(false);
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            enemyDies();
-        }
-
-
 
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
 
         if (thisEnemyType.Equals(enemyType.iceScream) || thisEnemyType.Equals(enemyType.forestPlant))
         {
             doRangedScan();
-        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))
+        } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle) || thisEnemyType.Equals(enemyType.SiFiRobot))
         {
             doMeleeScan();
         }

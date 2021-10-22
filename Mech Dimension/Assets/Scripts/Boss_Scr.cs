@@ -55,7 +55,7 @@ public class Boss_Scr : MonoBehaviour
     void Start()
     {
         playerControllerScript = GameObject.Find("Player").gameObject.GetComponent<PlayerController>();
-        healthSystemScript = GameObject.Find("HealthBar").gameObject.GetComponent<HealthSystem>();
+        healthSystemScript = GameObject.Find("HealthBarBackground").gameObject.GetComponent<HealthSystem>();
 
         //death anim
         deathAnim.gameObject.SetActive(false);
