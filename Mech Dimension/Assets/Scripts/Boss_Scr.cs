@@ -106,11 +106,6 @@ public class Boss_Scr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(doclapAttack());
-        }
-
         //turn to player
         if (playerControllerScript.transform.position.x > transform.position.x)
         {
@@ -385,8 +380,9 @@ public class Boss_Scr : MonoBehaviour
         Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
-        //spawn in enemies          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Instantiate(robot, spawnPosdMove.transform.position, transform.rotation);
+        Instantiate(plant, spawnPodStat.transform.position, transform.rotation);
+
         yield return new WaitForSeconds(0.5f);
 
         Instantiate(fireProj, HandBoth.transform.position, transform.rotation);

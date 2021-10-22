@@ -65,6 +65,15 @@ MonoBehaviour:
   forestBeetleDisplayMovment: {fileID: 8116909162065171140, guid: ffd0c34e89c413b41bfc51e8c45ff862, type: 3}
   forestBeetleDisplayAttack: {fileID: 4694114984360054570, guid: 685bdee0b1bfebf41a30d436bc5f0a1b, type: 3}
   forestBeetleDisplayDeath: {fileID: 0}
+  plantProjectilePrefab: {fileID: 0}
+  plantDisplayIdle: {fileID: 0}
+  plantDisplayAttack: {fileID: 0}
+  plantDisplayDeath: {fileID: 0}
+  forestPlantDisplayDeath: {fileID: 0}
+  RobotDisplayIdle: {fileID: 0}
+  RobotDisplayAttack: {fileID: 0}
+  RobotDisplayMove: {fileID: 0}
+  RobotDisplayDeath: {fileID: 0}
 --- !u!1 &2504026348862314255
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2504026350433429982
 Transform:
   m_ObjectHideFlags: 0
@@ -286,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2504026350593571239
 Transform:
   m_ObjectHideFlags: 0
