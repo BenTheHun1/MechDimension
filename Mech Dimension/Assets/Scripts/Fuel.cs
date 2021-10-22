@@ -35,7 +35,7 @@ public class Fuel : MonoBehaviour
         }
         else if (fuel <= 0f || Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("Main"); //Replace with "Main" later
+            SceneManager.LoadScene("Main");
         }
 
 

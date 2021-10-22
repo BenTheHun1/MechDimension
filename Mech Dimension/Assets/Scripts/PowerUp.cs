@@ -38,7 +38,7 @@ public class PowerUp : MonoBehaviour
         fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
         hp = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
         poofs = GameObject.Find("UpgradePoof").GetComponent<Animator>();
-        //boss = GameObject.Find("OpenBoss").GetComponent<OpenBoss>();
+        boss = GameObject.Find("Door").GetComponent<OpenBoss>();
 
         if (thisPowerUp == powerType.Gun)
         {

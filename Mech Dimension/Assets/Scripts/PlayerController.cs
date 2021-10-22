@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<AudioSource>().Stop();
         }
 
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -7f, 7f), rb.velocity.y); //change 10f to whatever the real max is
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -7f, 7f), rb.velocity.y);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
