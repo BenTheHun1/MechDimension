@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour
     //player accesss
     private PlayerController playerControllerScript;
 
+    //health access
+    private HealthSystem playerHealthSystemScript;
+
     //generic
     public enemyType thisEnemyType;
 
@@ -102,6 +105,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerHealthSystemScript = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
 
         if (thisEnemyType.Equals(enemyType.iceScream))
         {
@@ -463,6 +467,10 @@ public class Enemy : MonoBehaviour
 
 
         //if player is in range damage them
+        if(distanceToPlayer < range)
+        {
+            playerHealthSystemScript.damageMech(damage);
+        }
 
 
         yield return new WaitForSeconds(attackAnimLength / 2);

@@ -7,6 +7,7 @@ public class Boss_Scr : MonoBehaviour
 {
     private PlayerController playerControllerScript;
     private HealthSystem healthSystemScript;
+    private musicSrc musicManagerSript;
 
     public GameObject bossBattleUI;
     public GameObject healthBar;
@@ -52,9 +53,22 @@ public class Boss_Scr : MonoBehaviour
 
     public GameObject deathAnim;
 
+    public GameObject robot;
+    public GameObject plant;
+    public GameObject scream;
+
+    public GameObject spawnPosdMove;
+    public GameObject spawnPodStat;
+    public GameObject spawnPosStat2;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        musicManagerSript = GameObject.Find("musicManager").GetComponent<musicSrc>();
+        musicManagerSript.playBossTheme();
+
         playerControllerScript = GameObject.Find("Player").gameObject.GetComponent<PlayerController>();
         healthSystemScript = GameObject.Find("HealthBarBackground").gameObject.GetComponent<HealthSystem>();
 
@@ -92,7 +106,10 @@ public class Boss_Scr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(doclapAttack());
+        }
 
         //turn to player
         if (playerControllerScript.transform.position.x > transform.position.x)
@@ -296,7 +313,7 @@ public class Boss_Scr : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        healthSystemScript.damageMech(5f);
+        healthSystemScript.damageMech(2f);
         Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
         for (int i = 0; i < 120; i++)
         {
@@ -308,7 +325,7 @@ public class Boss_Scr : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        healthSystemScript.damageMech(5f);
+        healthSystemScript.damageMech(2f);
         Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
 
         for (int i = 0; i < 120; i++)
@@ -367,8 +384,10 @@ public class Boss_Scr : MonoBehaviour
 
         Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
 
+        yield return new WaitForSeconds(0.5f);
         //spawn in enemies          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        Instantiate(robot, spawnPosdMove.transform.position, transform.rotation);
+        yield return new WaitForSeconds(0.5f);
 
         Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
 

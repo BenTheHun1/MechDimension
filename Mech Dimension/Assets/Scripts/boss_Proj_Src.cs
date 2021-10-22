@@ -12,7 +12,6 @@ public class boss_Proj_Src : MonoBehaviour
 
     private TempSystem tempSystemScript;
     private PlayerController playerControllerScript;
-    private musicSrc musicManagerSript;
 
     public GameObject display;
 
@@ -25,12 +24,9 @@ public class boss_Proj_Src : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-
-        musicManagerSript = GameObject.Find("musicManager").GetComponent<musicSrc>();
+    { 
         tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-        musicManagerSript.playBossTheme();
     }
 
     // Update is called once per frame
@@ -71,10 +67,12 @@ public class boss_Proj_Src : MonoBehaviour
             if (isFireball)
             {
                 tempSystemScript.mechIsInHotArea = true;
+                tempSystemScript.mechIsInColdArea = false;
             }
             else
             {
                 tempSystemScript.mechIsInColdArea = true;
+                tempSystemScript.mechIsInHotArea = false;
             }
             yield return new WaitForSeconds(0.2f);
         }

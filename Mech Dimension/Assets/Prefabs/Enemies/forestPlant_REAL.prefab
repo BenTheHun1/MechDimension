@@ -165,6 +165,10 @@ MonoBehaviour:
   plantDisplayAttack: {fileID: 3447507146371060222, guid: 5e524f242b750b74bb6fc676f604438f, type: 3}
   plantDisplayDeath: {fileID: 8220924708862459694, guid: 5e13fe8aa63793b4a9ff0f086365f8d2, type: 3}
   forestPlantDisplayDeath: {fileID: 8220924708862459694, guid: 5e13fe8aa63793b4a9ff0f086365f8d2, type: 3}
+  RobotDisplayIdle: {fileID: 0}
+  RobotDisplayAttack: {fileID: 0}
+  RobotDisplayMove: {fileID: 0}
+  RobotDisplayDeath: {fileID: 0}
 --- !u!1 &6765247033727348805
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6765247033727348804
 Transform:
   m_ObjectHideFlags: 0
@@ -263,7 +267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6765247033835053117
 Transform:
   m_ObjectHideFlags: 0
