@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 551024189}
   - component: {fileID: 551024188}
   m_Layer: 0
-  m_Name: DarkToggle (1)
+  m_Name: LightToggle
   m_TagString: ToggleLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &598418549
 GameObject:
@@ -968,7 +968,7 @@ Transform:
   m_Children:
   - {fileID: 1672966802}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1568626898
 GameObject:
@@ -2698,17 +2698,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 595722769206381989, guid: ce1f87265a67c7446a5a02a976a860d4, type: 3}
-      propertyPath: delay
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 595722770057064882, guid: ce1f87265a67c7446a5a02a976a860d4, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 595722770057064892, guid: ce1f87265a67c7446a5a02a976a860d4, type: 3}
-      propertyPath: speed
-      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 595722770057064893, guid: ce1f87265a67c7446a5a02a976a860d4, type: 3}
       propertyPath: m_RootOrder
@@ -2853,63 +2845,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae9e84a9a9ba2b4e8626da337379463, type: 3}
---- !u!1001 &4435741764229303684
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4435741765214541450, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_Name
-      value: LampBoi
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 16.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435741765214541461, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a769e8d14fec368418e9b1bfc2308960, type: 3}
 --- !u!1001 &8384903744617469267
 PrefabInstance:
   m_ObjectHideFlags: 0
