@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public musicSrc music;
 
     public bool debugJump;
+    public bool debugLight;
 
     bool isMoving;
     // Start is called before the first frame update
@@ -89,7 +90,7 @@ public class PlayerController : MonoBehaviour
             maxJumps = 0;
             Legs.GetComponent<SpriteRenderer>().color = new Color(0.85f, 0.45f, 0.115f, 1);
         }
-        if (hasLight)
+        if (hasLight || debugLight)
         {
             Light.SetActive(true);
         }

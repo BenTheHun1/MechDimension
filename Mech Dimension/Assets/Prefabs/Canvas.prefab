@@ -1834,7 +1834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328a0bafe9e837740ad61466c1037412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mechHealth: 50
   HealthBarDisplay: {fileID: 8694128148726134047}
   deathMenu: {fileID: 305270055}
 --- !u!1 &8694128148726134047
