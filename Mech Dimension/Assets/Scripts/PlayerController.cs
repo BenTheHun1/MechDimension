@@ -183,7 +183,11 @@ public class PlayerController : MonoBehaviour
         {
             jumpsLeft = maxJumps;
             isOnGround = true;
-            
+            gameObject.GetComponent<Animator>().SetBool("jumping", false);
+            Legs.GetComponent<Animator>().SetBool("jumping", false);
+            Gun.GetComponent<Animator>().SetBool("jumping", false);
+            Rocket.GetComponent<Animator>().SetBool("jumping", false);
+            Rocket.GetComponent<Animator>().SetBool("fire", false);
         }
     }
 
