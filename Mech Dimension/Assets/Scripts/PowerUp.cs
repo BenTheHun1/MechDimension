@@ -7,6 +7,7 @@ public class PowerUp : MonoBehaviour
 {
     PlayerController pl;
     Fuel fp;
+    HealthSystem hp;
     
     public enum powerType
     {
@@ -25,8 +26,8 @@ public class PowerUp : MonoBehaviour
             Destroy(gameObject);
         }
         pl = GameObject.Find("Player").GetComponent<PlayerController>();
-        fp = GameObject.Find("GameManager").GetComponent<Fuel>();
-
+        fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
+        hp = GameObject.Find("HealthBarBackground").GetComponent<HealthSystem>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -75,11 +76,13 @@ public class PowerUp : MonoBehaviour
             if (thisPowerUp == powerType.HealthUpgrade1)
             {
                 HealthSystem.mechMAXHealth += 25;
+                hp.healMech(25f);
                 PlayerController.hasHPUpgrade1 = true;
             }
             if (thisPowerUp == powerType.HealthUpgrade2)
             {
                 HealthSystem.mechMAXHealth += 25;
+                hp.healMech(25f);
                 PlayerController.hasHPUpgrade2 = true;
             }
 

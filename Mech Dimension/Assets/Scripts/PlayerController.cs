@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
+        tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
         if (hasGun)
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Lamp"))
         {
             collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", true);
-            //tempSystemScript.mechIsInRegularArea = true;
+            tempSystemScript.mechIsInRegularArea = true;
         }
     }
 
