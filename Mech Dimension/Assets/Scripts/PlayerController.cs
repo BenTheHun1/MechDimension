@@ -38,11 +38,13 @@ public class PlayerController : MonoBehaviour
     public GameObject Rocket;
     public Rigidbody2D rb;
 
+    public bool debugJump;
+
     bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
-        tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
+        //tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
         if (hasGun)
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             TempControl.SetActive(false);
         }
-        if (hasRocketJump)
+        if (hasRocketJump || debugJump)
         {
             maxJumps = 2;
         }
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
             left = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && hasJump && jumpsLeft > 0 && !isFrozen)
+        if (Input.GetKeyDown(KeyCode.Space) && (hasJump || debugJump) && jumpsLeft > 0 && !isFrozen)
         {
             jumpsLeft--;
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
@@ -135,16 +137,28 @@ public class PlayerController : MonoBehaviour
             Gun.GetComponent<Animator>().SetBool("jumping", true);
             Rocket.GetComponent<Animator>().SetBool("jumping", true);
 
+            if (PlayerController.hasRocketJump && jumpsLeft == 0)
+            {
+                Rocket.GetComponent<Animator>().SetBool("fire", true);
+            }
 
         }
 
         if (rb.velocity.x > 2 || rb.velocity.x < -2)
         {
             isMoving = true;
+            gameObject.GetComponent<Animator>().SetBool("running", true);
+            Legs.GetComponent<Animator>().SetBool("running", true);
+            Gun.GetComponent<Animator>().SetBool("running", true);
+            Rocket.GetComponent<Animator>().SetBool("running", true);
         }
         else
         {
             isMoving = false;
+            gameObject.GetComponent<Animator>().SetBool("running", false);
+            Legs.GetComponent<Animator>().SetBool("running", false);
+            Gun.GetComponent<Animator>().SetBool("running", false);
+            Rocket.GetComponent<Animator>().SetBool("running", false);
         }
 
         if (isMoving && isOnGround)
@@ -206,7 +220,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Lamp"))
         {
             collision.gameObject.GetComponent<Animator>().SetBool("NearbyPlayer", true);
-            tempSystemScript.mechIsInRegularArea = true;
+            //tempSystemScript.mechIsInRegularArea = true;
         }
     }
 
