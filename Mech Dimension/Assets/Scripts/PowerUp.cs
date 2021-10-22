@@ -96,7 +96,7 @@ public class PowerUp : MonoBehaviour
             if (thisPowerUp == powerType.TempControl)
             {
                 PlayerController.hasTempControl = true;
-                pl.TempControl.SetActive(true);
+                pl.tempSystemScript.mechHasTempControlMod = true;
             }
             if (thisPowerUp == powerType.FuelUpgrade1)
             {

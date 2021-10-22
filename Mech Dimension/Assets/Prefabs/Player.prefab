@@ -809,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64dc894bcb0917548be21d46a641d077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSystemScript: {fileID: 0}
   speed: 1200
   jumpHeight: 11
   left: 0
@@ -820,7 +821,6 @@ MonoBehaviour:
   jumpsLeft: 0
   Gun: {fileID: 595722769206382011}
   Light: {fileID: 595722768330185128}
-  TempControl: {fileID: 804809405}
   Legs: {fileID: 570351305}
   Rocket: {fileID: 7931232576927627872}
   rb: {fileID: 595722770057064895}
@@ -901,7 +901,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 0441b9901d58f964fbf1009ca2a6aba8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
-  m_Pitch: 0.9
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0

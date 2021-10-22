@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private TempSystem tempSystemScript;
+    public TempSystem tempSystemScript;
 
 
     public float speed;
@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Gun;
     public GameObject Light;
-    public GameObject TempControl;
     public GameObject Legs;
     public GameObject Rocket;
     public Rigidbody2D rb;
+
 
     public bool debugJump;
 
@@ -65,11 +65,11 @@ public class PlayerController : MonoBehaviour
         }
         if (hasTempControl)
         {
-            TempControl.SetActive(true);
+            tempSystemScript.mechHasTempControlMod = true;
         }
         else
         {
-            TempControl.SetActive(false);
+            tempSystemScript.mechHasTempControlMod = false;
         }
         if (hasRocketJump || debugJump)
         {
@@ -215,6 +215,22 @@ public class PlayerController : MonoBehaviour
             Legs.GetComponent<SpriteRenderer>().material = def;
             Gun.GetComponent<SpriteRenderer>().material = def;
             Rocket.GetComponent<SpriteRenderer>().material = def;
+        }
+        if (collision.gameObject.CompareTag("ToggleHeat"))
+        {
+            tempSystemScript.mechIsInHotArea = true;
+            tempSystemScript.mechIsInRegularArea = false;
+        }
+        if (collision.gameObject.CompareTag("ToggleCold"))
+        {
+            tempSystemScript.mechIsInColdArea = true;
+            tempSystemScript.mechIsInRegularArea = false;
+        }
+        if (collision.gameObject.CompareTag("ToggleNormal"))
+        {
+            tempSystemScript.mechIsInHotArea = false;
+            tempSystemScript.mechIsInColdArea = false;
+            tempSystemScript.mechIsInRegularArea = true;
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
