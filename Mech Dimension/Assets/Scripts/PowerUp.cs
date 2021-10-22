@@ -128,7 +128,11 @@ public class PowerUp : MonoBehaviour
             }
             if(thisPowerUp == powerType.crystal)
             {
-
+                pl.iHaveThisManyCrystals += 1;
+                if(pl.iHaveThisManyCrystals >= 3)
+                {
+                    //THIS SHOULD SUMMON ENEMY
+                }
             }
 
             poofs.SetTrigger("pooof");

@@ -307,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285792889813877004, guid: 0603e9a1dfe2bc747ad15b9fd891e5f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 1285792889813877004, guid: 0603e9a1dfe2bc747ad15b9fd891e5f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -353,6 +353,10 @@ PrefabInstance:
       propertyPath: crystalIcon
       value: 
       objectReference: {fileID: 21300000, guid: 0ebf53f12aec46b44aae7795bfdb0538, type: 3}
+    - target: {fileID: 7128134008123509922, guid: 0603e9a1dfe2bc747ad15b9fd891e5f6, type: 3}
+      propertyPath: thisPowerUp
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0603e9a1dfe2bc747ad15b9fd891e5f6, type: 3}
 --- !u!1001 &623940595

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public TempSystem tempSystemScript;
-
+    public float iHaveThisManyCrystals = 0;
 
     public float speed;
     public float jumpHeight;
