@@ -37,28 +37,32 @@ public class musicSrc : MonoBehaviour
     public void playIceTheme()
     {
         gameObject.GetComponent<AudioSource>().clip = iceTheme;
-        //gameObject.GetComponent<AudioSource>().Play
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void playHubTheme()
     {
-
+        gameObject.GetComponent<AudioSource>().clip = hubTheme;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
 
     public void playSiFiTheme()
     {
-
+        gameObject.GetComponent<AudioSource>().clip = SiFiTheme;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void playForestTheme()
     {
-
+        gameObject.GetComponent<AudioSource>().clip = forestTheme;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void playBossTheme()
     {
-
+        gameObject.GetComponent<AudioSource>().clip = badGuyTheme;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
 
