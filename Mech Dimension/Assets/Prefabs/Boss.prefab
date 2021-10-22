@@ -689,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossBattleUI: {fileID: 0}
   healthBar: {fileID: 0}
+  congratsUI: {fileID: 0}
   regularBossDisplay: {fileID: 7675891953156522800}
   fireBossDisplay: {fileID: 7675891954320027738}
   iceBossDisplay: {fileID: 7675891954326359257}
