@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
         iceScream,
         iceGoop,
         forestBeetle,
-        forestEnemy2,
+        forestPlant,
         SiFiEnemy1,
         SiFiEnemy2,
     }
@@ -76,6 +76,19 @@ public class Enemy : MonoBehaviour
     private float forestBeetleMovementAnimLength = 2.5f;
 
     public GameObject forestBeetleDisplayDeath;
+
+
+    //for Plant
+    public GameObject plantProjectilePrefab;
+    public GameObject plantDisplayIdle;
+    public GameObject plantDisplayAttack;
+    //private float plantAttackAnimLength = 1.5f;
+
+    public GameObject forestPlantDisplayDeath;
+
+
+
+
 
 
     // Start is called before the first frame update
@@ -155,6 +168,24 @@ public class Enemy : MonoBehaviour
             var Death = Instantiate(forestBeetleDisplayDeath, enemyDisplayParent.transform);
             enemyDisplayDeath = Death;
             enemyDisplayDeath.gameObject.SetActive(false);
+        } else if (thisEnemyType.Equals(enemyType.forestBeetle))
+        {
+            //variables
+            health = 15;
+            damage = 2;
+            rateOfFire = 6;
+            range = 4;
+            sight = 8;
+            //attackAnimLength = iceScreamAttackAnimLength;       // do this for the other start methods!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //enemyDisplayDeath = iceScreamDisplayDeath;
+
+
+
+            //animation states
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
         }
     }
 
@@ -169,7 +200,7 @@ public class Enemy : MonoBehaviour
 
         distanceToPlayer = Vector3.Distance(transform.position, playerControllerScript.transform.position);
 
-        if (thisEnemyType.Equals(enemyType.iceScream))
+        if (thisEnemyType.Equals(enemyType.iceScream) || thisEnemyType.Equals(enemyType.forestPlant))
         {
             doRangedScan();
         } else if (thisEnemyType.Equals(enemyType.iceGoop) || thisEnemyType.Equals(enemyType.forestBeetle))
