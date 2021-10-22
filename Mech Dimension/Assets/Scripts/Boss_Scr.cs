@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss_Scr : MonoBehaviour
 {
     private PlayerController playerControllerScript;
+    private HealthSystem healthSystemScript;
+
+    public GameObject bossBattleUI;
+    public GameObject healthBar;
 
     private bool attackInProgress;
 
@@ -39,10 +44,22 @@ public class Boss_Scr : MonoBehaviour
 
     public GameObject HandBoth;
 
+    public GameObject fireHandBoth;
+    public GameObject iceHandBoth;
+    public GameObject hitHandBoth;
+    public GameObject GetHandBoth;
+
+    public GameObject deathAnim;
+
     // Start is called before the first frame update
     void Start()
     {
         playerControllerScript = GameObject.Find("Player").gameObject.GetComponent<PlayerController>();
+        healthSystemScript = GameObject.Find("HealthBar").gameObject.GetComponent<HealthSystem>();
+
+        //death anim
+        deathAnim.gameObject.SetActive(false);
+
 
         //body
         fireBossDisplay.gameObject.SetActive(false);
@@ -58,11 +75,24 @@ public class Boss_Scr : MonoBehaviour
         FireHand2.gameObject.SetActive(false);
         IceHand2.gameObject.SetActive(false);
         HitHand2.gameObject.SetActive(false);
+
+        //handBoth
+        fireHandBoth.gameObject.SetActive(false);
+        iceHandBoth.gameObject.SetActive(false);
+        hitHandBoth.gameObject.SetActive(false);
+        GetHandBoth.gameObject.SetActive(false);
+
+        //ui in
+        bossBattleUI.gameObject.SetActive(true);
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
+
+
         //turn to player
         if (playerControllerScript.transform.position.x > transform.position.x)
         {
@@ -72,7 +102,6 @@ public class Boss_Scr : MonoBehaviour
         {
             transform.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
-
 
         if (!attackInProgress)
         {
@@ -96,7 +125,6 @@ public class Boss_Scr : MonoBehaviour
 
 
 
-
     }
 
 
@@ -111,44 +139,261 @@ public class Boss_Scr : MonoBehaviour
 
     IEnumerator doFireAttack()
     {
+        attackInProgress = true;
         //body
+        regularBossDisplay.gameObject.SetActive(false);
+        fireBossDisplay.gameObject.SetActive(true);
 
         //hand1
+        RegHand1.gameObject.SetActive(false);
+        fireHand1.gameObject.SetActive(true);
 
         //hand2
+        RegHand2.gameObject.SetActive(false);
+        FireHand2.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.0f);
 
-        //hand1 + 2
+        //hand1 + 2 (actual objects disable)
+        Hand1.gameObject.SetActive(false);
+        Hand2.gameObject.SetActive(false);
+
+        //hands together (actual obj enable...and enable correct one)
+        fireHandBoth.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
         
-        //hands together
+
+        for(int i = 0; i < 6; i++)
+        {
+            Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+
+        }
 
 
+        //hands together (disable fire one, then disable actual obj)
+        fireHandBoth.gameObject.SetActive(false);
 
+        //hands1 + 2 (actual obj enable)
+        Hand1.gameObject.SetActive(true);
+        Hand2.gameObject.SetActive(true);
 
+        yield return new WaitForSeconds(0.5f);
+
+        //body
+        regularBossDisplay.gameObject.SetActive(true);
+        fireBossDisplay.gameObject.SetActive(false);
+
+        //hand1
+        RegHand1.gameObject.SetActive(true);
+        fireHand1.gameObject.SetActive(false);
+
+        //hand2
+        RegHand2.gameObject.SetActive(true);
+        FireHand2.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(3.0f);
+
+        attackInProgress = false;
     }
 
     IEnumerator doIceAttack()
     {
+        attackInProgress = true;
+        //body
+        regularBossDisplay.gameObject.SetActive(false);
+        iceBossDisplay.gameObject.SetActive(true);
+
+        //hand1
+        RegHand1.gameObject.SetActive(false);
+        IceHand1.gameObject.SetActive(true);
+
+        //hand2
+        RegHand2.gameObject.SetActive(false);
+        IceHand2.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.0f);
 
+        //hand1 + 2 (actual objects disable)
+        Hand1.gameObject.SetActive(false);
+        Hand2.gameObject.SetActive(false);
+
+        //hands together (actual obj enable...and enable correct one)
+        iceHandBoth.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+
+        }
+
+
+        //hands together (disable fire one, then disable actual obj)
+        iceHandBoth.gameObject.SetActive(false);
+
+        //hands1 + 2 (actual obj enable)
+        Hand1.gameObject.SetActive(true);
+        Hand2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        //body
+        regularBossDisplay.gameObject.SetActive(true);
+        iceBossDisplay.gameObject.SetActive(false);
+
+        //hand1
+        RegHand1.gameObject.SetActive(true);
+        IceHand1.gameObject.SetActive(false);
+
+        //hand2
+        RegHand2.gameObject.SetActive(true);
+        IceHand2.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(3.0f);
+        attackInProgress = false;
     }
+
+
+
+
 
     IEnumerator doBlock()
     {
+        attackInProgress = true;
+
+        yield return new WaitForSeconds(1.0f);
+
+        //hand1 + 2 (actual objects disable)
+        Hand1.gameObject.SetActive(false);
+        Hand2.gameObject.SetActive(false);
+
+        //hands together (actual obj enable...and enable correct one)
+        GetHandBoth.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.0f);
+
+        healthSystemScript.damageMech(5f);
+        Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
+        for (int i = 0; i < 120; i++)
+        {
+            health += 0.1f;
+            healthBar.gameObject.GetComponent<Image>().fillAmount = health / 200;
+            yield return new WaitForSeconds(0.01f);
+
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        healthSystemScript.damageMech(5f);
+        Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
+
+        for (int i = 0; i < 120; i++)
+        {
+            health += 0.1f;
+            healthBar.gameObject.GetComponent<Image>().fillAmount = health / 200;
+            yield return new WaitForSeconds(0.01f);
+
+        }
 
 
         yield return new WaitForSeconds(1.0f);
 
 
+        //hands together (disable fire one, then disable actual obj)
+        GetHandBoth.gameObject.SetActive(false);
+
+        //hands1 + 2 (actual obj enable)
+        Hand1.gameObject.SetActive(true);
+        Hand2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(3.0f);
+
+        attackInProgress = false;
     }
+
+
+
+
 
     IEnumerator doclapAttack()
     {
+        attackInProgress = true;
+        //body
+        regularBossDisplay.gameObject.SetActive(false);
+        hitBossDisplay.gameObject.SetActive(true);
+
+        //hand1
+        RegHand1.gameObject.SetActive(false);
+        HitHand1.gameObject.SetActive(true);
+
+        //hand2
+        RegHand2.gameObject.SetActive(false);
+        HitHand2.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.0f);
 
+        //hand1 + 2 (actual objects disable)
+        Hand1.gameObject.SetActive(false);
+        Hand2.gameObject.SetActive(false);
+
+        //hands together (actual obj enable...and enable correct one)
+        hitHandBoth.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Instantiate(iceProj, HandBoth.transform.position, transform.rotation);
+
+        //spawn in enemies          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+        Instantiate(fireProj, HandBoth.transform.position, transform.rotation);
+
+        //hands together (disable fire one, then disable actual obj)
+        hitHandBoth.gameObject.SetActive(false);
+
+        //hands1 + 2 (actual obj enable)
+        Hand1.gameObject.SetActive(true);
+        Hand2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        //body
+        regularBossDisplay.gameObject.SetActive(true);
+        hitBossDisplay.gameObject.SetActive(false);
+
+        //hand1
+        RegHand1.gameObject.SetActive(true);
+        HitHand1.gameObject.SetActive(false);
+
+        //hand2
+        RegHand2.gameObject.SetActive(true);
+        HitHand2.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(3.0f);
+        attackInProgress = false;
     }
 
 
@@ -169,6 +414,7 @@ public class Boss_Scr : MonoBehaviour
     public void damageEnemy(float damageDelt)
     {
         health -= damageDelt;
+        healthBar.gameObject.GetComponent<Image>().fillAmount = health / 200;
         if (health <= 0)
         {
             enemyDies();
@@ -178,11 +424,35 @@ public class Boss_Scr : MonoBehaviour
 
     void enemyDies()
     {
-        //enemyDisplayAttack.gameObject.SetActive(false);
-        //enemyDisplayIdle.gameObject.SetActive(false);
-        // enemyDisplayMovement.gameObject.SetActive(false);
-        //enemyDisplayDeath.gameObject.SetActive(true);
-        //Destroy(gameObject, 0.8f);
+        attackInProgress = true;
+        //body
+        fireBossDisplay.gameObject.SetActive(false);
+        iceBossDisplay.gameObject.SetActive(false);
+        hitBossDisplay.gameObject.SetActive(false);
+        regularBossDisplay.gameObject.SetActive(false);
+
+        //hand1
+        fireHand1.gameObject.SetActive(false);
+        IceHand1.gameObject.SetActive(false);
+        HitHand1.gameObject.SetActive(false);
+        RegHand1.gameObject.SetActive(false);
+
+        //hand2
+        FireHand2.gameObject.SetActive(false);
+        IceHand2.gameObject.SetActive(false);
+        HitHand2.gameObject.SetActive(false);
+        RegHand2.gameObject.SetActive(false);
+        
+
+        //handBoth
+        fireHandBoth.gameObject.SetActive(false);
+        iceHandBoth.gameObject.SetActive(false);
+        hitHandBoth.gameObject.SetActive(false);
+        GetHandBoth.gameObject.SetActive(false);
+
+        deathAnim.gameObject.SetActive(true);
+
+        Destroy(gameObject, 4.0f);
     }
 
 }

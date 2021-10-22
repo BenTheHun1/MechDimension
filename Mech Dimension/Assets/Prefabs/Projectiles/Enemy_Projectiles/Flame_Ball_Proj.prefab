@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 5613474715425819411}
-  isFireball: 0
+  isFireball: 1
   col: {fileID: 1401237858}
 --- !u!61 &1401237858
 BoxCollider2D:
