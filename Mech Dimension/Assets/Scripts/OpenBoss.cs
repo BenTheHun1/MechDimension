@@ -67,9 +67,17 @@ public class OpenBoss : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.W) && PlayerController.hasCrystal1 && PlayerController.hasCrystal2 && PlayerController.hasCrystal3)
+        {
+            //SceneManager.LoadScene("Boss");
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Slash))
         {
             //SceneManager.LoadScene("Boss");
         }
