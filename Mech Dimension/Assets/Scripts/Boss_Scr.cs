@@ -12,7 +12,8 @@ public class Boss_Scr : MonoBehaviour
     public GameObject iceBossDisplay;
     public GameObject blackBossDisplay;
 
-
+    public GameObject fireProj;
+    public GameObject iceProj;
 
 
 

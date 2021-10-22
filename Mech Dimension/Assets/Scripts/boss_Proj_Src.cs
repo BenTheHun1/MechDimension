@@ -13,9 +13,11 @@ public class boss_Proj_Src : MonoBehaviour
     private TempSystem tempSystemScript;
     private PlayerController playerControllerScript;
 
+    public GameObject display;
+
     public bool isFireball;
 
-
+    public Collider2D col;
 
 
 
@@ -36,8 +38,10 @@ public class boss_Proj_Src : MonoBehaviour
 
     void moveProj()
     {
-        transform.position = Vector3.Lerp(transform.position, playerControllerScript.transform.position, Time.time * speed);
+        //transform.position = Vector3.Lerp(transform.position, playerControllerScript.transform.position, Time.time * speed);
+
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerControllerScript.transform.position - transform.position), 5 * Time.deltaTime);
+        transform.position += transform.forward * Time.deltaTime * speed;
     }
 
 
@@ -45,8 +49,9 @@ public class boss_Proj_Src : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            display.gameObject.SetActive(false);
+            col.enabled = false;
             StartCoroutine(hitPlayer());
-            Destroy(gameObject);
         }
         else
         {
@@ -77,6 +82,7 @@ public class boss_Proj_Src : MonoBehaviour
         {
             tempSystemScript.mechIsInColdArea = false;
         }
+        Destroy(gameObject);
     }
 
 
