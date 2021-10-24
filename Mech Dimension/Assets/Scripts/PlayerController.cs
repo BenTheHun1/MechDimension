@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Light;
     public GameObject Legs;
     public GameObject Rocket;
+    public AudioSource poof;
     public Rigidbody2D rb;
     public musicSrc music;
 
@@ -201,9 +202,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log(collision.transform.parent.parent.gameObject.name);
             collision.gameObject.transform.parent.parent.gameObject.GetComponent<Enemy>().damageEnemy(20f);
-            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (jumpHeight / 2), ForceMode2D.Impulse);
+            Legs.GetComponent<AudioSource>().Play();
+        }
+        if (collision.gameObject.CompareTag("Boss")) //Makes Boss a little easy. But they are damageable now.
+        {
+            collision.gameObject.GetComponent<Boss_Scr>().damageEnemy(20f);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (jumpHeight / 2), ForceMode2D.Impulse);
             Legs.GetComponent<AudioSource>().Play();
         }
 
@@ -246,7 +252,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
-            Rocket.GetComponent<AudioSource>().Play();
+            poof.Play();
 
         }
         if (collision.gameObject.CompareTag("Lamp"))

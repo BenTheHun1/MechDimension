@@ -39,7 +39,11 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().damageEnemy(5);
+            collision.gameObject.GetComponent<Enemy>().damageEnemy(5f);
+        }
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            collision.gameObject.GetComponent<Boss_Scr>().damageEnemy(5f);
         }
         else
         {

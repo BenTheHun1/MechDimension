@@ -12,6 +12,7 @@ TagManager:
   - ToggleCold
   - ToggleHeat
   - ToggleNormal
+  - Boss
   layers:
   - Default
   - TransparentFX
