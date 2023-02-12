@@ -45,15 +45,24 @@ public class PlayerController : MonoBehaviour
 
     public bool debugJump;
     public bool debugLight;
+    public bool debugCrystals;
 
     bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
-        tempSystemScript = GameObject.Find("tempatureBarBackground").GetComponent<TempSystem>();
-        music = GameObject.Find("musicManager").GetComponent<musicSrc>();
+        if (debugCrystals)
+        {
+            hasCrystal1 = true;
+            hasCrystal2 = true;
+            hasCrystal3 = true;
+        }
+
+        tempSystemScript = FindObjectOfType<TempSystem>();
+        music = FindObjectOfType<musicSrc>();
 
         gameObject.GetComponent<SpriteRenderer>().material = def;
+
         if (hasGun)
         {
             Gun.SetActive(true);

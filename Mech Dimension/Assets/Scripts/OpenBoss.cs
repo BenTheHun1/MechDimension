@@ -9,6 +9,8 @@ public class OpenBoss : MonoBehaviour
     public GameObject displayCrystal2;
     public GameObject displayCrystal3;
 
+    private bool doorEnabled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,17 +69,22 @@ public class OpenBoss : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.W) && PlayerController.hasCrystal1 && PlayerController.hasCrystal2 && PlayerController.hasCrystal3)
+        if (PlayerController.hasCrystal1 && PlayerController.hasCrystal2 && PlayerController.hasCrystal3)
         {
-            SceneManager.LoadScene("BossScene");
+            doorEnabled = true;
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        doorEnabled = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Slash))
+        if (Input.GetKeyDown(KeyCode.W) && doorEnabled)
         {
             SceneManager.LoadScene("BossScene");
         }

@@ -926,6 +926,7 @@ MonoBehaviour:
   music: {fileID: 0}
   debugJump: 0
   debugLight: 0
+  debugCrystals: 0
 --- !u!70 &595722770057064894
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

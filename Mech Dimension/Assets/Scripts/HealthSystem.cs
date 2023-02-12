@@ -24,7 +24,7 @@ public class HealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fp = GameObject.Find("Fuel Gauge").GetComponent<Fuel>();
+        fp = FindObjectOfType<Fuel>();
         Debug.Log(mechMAXHealth);
         mechHealth = mechMAXHealth;
         healMech(1f);
